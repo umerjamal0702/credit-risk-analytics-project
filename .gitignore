@@ -1,0 +1,37 @@
+# Raw source data (download separately — see Dataset/README.md)
+Dataset/*.csv
+Dataset/*.csv.gz
+Dataset/*.xlsx
+Dataset/*.ipynb
+
+# Generated database (rebuild with SQL/00_build_warehouse.py)
+*.db
+*.sqlite
+*.sqlite3
+
+# Generated model artifacts and intermediate feature files
+*.pkl
+*.joblib
+
+# Large generated extracts (rebuild from the warehouse)
+PowerBI/extracts/fact_loan_performance*.csv
+PowerBI/extracts/fact_loan_performance*.csv.gz
+Python/**/scored_current_loans.csv
+Python/**/test_predictions*.csv
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.ipynb_checkpoints/
+
+# Node
+node_modules/
+package-lock.json
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

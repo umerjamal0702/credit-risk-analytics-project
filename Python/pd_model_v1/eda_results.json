@@ -1,0 +1,375 @@
+{
+  "overall_default_rate": 0.20028216768497342,
+  "n_loans": 87891,
+  "n_charged_off": 17603,
+  "n_fully_paid": 70288,
+  "default_rate_by_grade": {
+    "G": {
+      "rate": 0.5905044510385756,
+      "count": 337
+    },
+    "F": {
+      "rate": 0.5280678851174935,
+      "count": 1532
+    },
+    "E": {
+      "rate": 0.4383412149872681,
+      "count": 5498
+    },
+    "D": {
+      "rate": 0.344808693270021,
+      "count": 10951
+    },
+    "C": {
+      "rate": 0.23698288887981378,
+      "count": 24487
+    },
+    "B": {
+      "rate": 0.1319798765476148,
+      "count": 28027
+    },
+    "A": {
+      "rate": 0.05316841549915001,
+      "count": 17059
+    }
+  },
+  "default_rate_by_purpose": {
+    "small_business": {
+      "rate": 0.30038510911424904,
+      "count": 779
+    },
+    "house": {
+      "rate": 0.26785714285714285,
+      "count": 280
+    },
+    "moving": {
+      "rate": 0.22659176029962547,
+      "count": 534
+    },
+    "medical": {
+      "rate": 0.2227579556412729,
+      "count": 1037
+    },
+    "debt_consolidation": {
+      "rate": 0.2182338248328096,
+      "count": 49644
+    },
+    "renewable_energy": {
+      "rate": 0.2037037037037037,
+      "count": 54
+    },
+    "other": {
+      "rate": 0.19254278728606358,
+      "count": 4908
+    },
+    "major_purchase": {
+      "rate": 0.1915014164305949,
+      "count": 1765
+    },
+    "home_improvement": {
+      "rate": 0.17901897601145722,
+      "count": 5586
+    },
+    "vacation": {
+      "rate": 0.17791411042944785,
+      "count": 489
+    },
+    "credit_card": {
+      "rate": 0.16382206082614617,
+      "count": 22030
+    },
+    "car": {
+      "rate": 0.1503184713375796,
+      "count": 785
+    }
+  },
+  "default_rate_by_home_ownership": {
+    "RENT": {
+      "rate": 0.2302588489905174,
+      "count": 35117
+    },
+    "OWN": {
+      "rate": 0.20723519390720513,
+      "count": 9979
+    },
+    "MORTGAGE": {
+      "rate": 0.17406645791466094,
+      "count": 42794
+    },
+    "ANY": {
+      "rate": 0.0,
+      "count": 1
+    }
+  },
+  "default_rate_by_term": {
+    " 60 months": {
+      "rate": 0.3741237732825956,
+      "count": 19972
+    },
+    " 36 months": {
+      "rate": 0.14916297354201327,
+      "count": 67919
+    }
+  },
+  "default_rate_by_verification_status": {
+    "Verified": {
+      "rate": 0.24719613066031124,
+      "count": 28532
+    },
+    "Source Verified": {
+      "rate": 0.19570018359364608,
+      "count": 37583
+    },
+    "Not Verified": {
+      "rate": 0.14672116091109477,
+      "count": 21776
+    }
+  },
+  "default_rate_by_application_type": {
+    "Joint App": {
+      "rate": 0.24619289340101522,
+      "count": 394
+    },
+    "Individual": {
+      "rate": 0.20007543115763968,
+      "count": 87497
+    }
+  },
+  "default_rate_by_sub_grade": {
+    "G4": {
+      "rate": 0.7297297297297297,
+      "count": 37
+    },
+    "G3": {
+      "rate": 0.65625,
+      "count": 64
+    },
+    "F5": {
+      "rate": 0.6555555555555556,
+      "count": 180
+    },
+    "G5": {
+      "rate": 0.6153846153846154,
+      "count": 26
+    },
+    "F3": {
+      "rate": 0.5642857142857143,
+      "count": 280
+    },
+    "G2": {
+      "rate": 0.5428571428571428,
+      "count": 105
+    },
+    "G1": {
+      "rate": 0.5428571428571428,
+      "count": 105
+    },
+    "F2": {
+      "rate": 0.5380434782608695,
+      "count": 368
+    },
+    "F4": {
+      "rate": 0.526595744680851,
+      "count": 188
+    },
+    "E5": {
+      "rate": 0.4992481203007519,
+      "count": 665
+    },
+    "E4": {
+      "rate": 0.48645465253239106,
+      "count": 849
+    },
+    "F1": {
+      "rate": 0.4573643410852713,
+      "count": 516
+    },
+    "E2": {
+      "rate": 0.42503639010189226,
+      "count": 1374
+    },
+    "E3": {
+      "rate": 0.4227714033539276,
+      "count": 1133
+    },
+    "E1": {
+      "rate": 0.4075829383886256,
+      "count": 1477
+    },
+    "D5": {
+      "rate": 0.38783269961977185,
+      "count": 1578
+    },
+    "D4": {
+      "rate": 0.37565858798735513,
+      "count": 1898
+    },
+    "D3": {
+      "rate": 0.3566468253968254,
+      "count": 2016
+    },
+    "D2": {
+      "rate": 0.34584897788902796,
+      "count": 2397
+    },
+    "D1": {
+      "rate": 0.29490529065969956,
+      "count": 3062
+    },
+    "C4": {
+      "rate": 0.26820993813610056,
+      "count": 5011
+    },
+    "C5": {
+      "rate": 0.26800761076379453,
+      "count": 3679
+    },
+    "C3": {
+      "rate": 0.24678768101162554,
+      "count": 4903
+    },
+    "C2": {
+      "rate": 0.210476371227937,
+      "count": 5269
+    },
+    "C1": {
+      "rate": 0.20515555555555556,
+      "count": 5625
+    },
+    "B5": {
+      "rate": 0.16050035236081747,
+      "count": 5676
+    },
+    "B4": {
+      "rate": 0.15063887020847344,
+      "count": 5948
+    },
+    "B3": {
+      "rate": 0.13404507710557534,
+      "count": 5901
+    },
+    "B2": {
+      "rate": 0.1136279926335175,
+      "count": 5430
+    },
+    "B1": {
+      "rate": 0.09542586750788644,
+      "count": 5072
+    },
+    "A5": {
+      "rate": 0.07623888182973317,
+      "count": 4722
+    },
+    "A4": {
+      "rate": 0.06690561529271206,
+      "count": 3348
+    },
+    "A3": {
+      "rate": 0.0450414855788226,
+      "count": 2531
+    },
+    "A2": {
+      "rate": 0.04190260475651189,
+      "count": 2649
+    },
+    "A1": {
+      "rate": 0.025728537673930164,
+      "count": 3809
+    }
+  },
+  "numeric_summary": {
+    "loan_amnt": {
+      "fully_paid_mean": 14065.021767584794,
+      "charged_off_mean": 15618.175879111515,
+      "overall_mean": 14376.090839790195,
+      "overall_median": 12000.0
+    },
+    "int_rate": {
+      "fully_paid_mean": 11.310398503300707,
+      "charged_off_mean": 14.484264613986253,
+      "overall_mean": 11.946067287890681,
+      "overall_median": 11.53
+    },
+    "annual_inc": {
+      "fully_paid_mean": 79370.10778198269,
+      "charged_off_mean": 70957.42592114978,
+      "overall_mean": 77685.19762285103,
+      "overall_median": 65000.0
+    },
+    "dti": {
+      "fully_paid_mean": 18.47063751991805,
+      "charged_off_mean": 21.05127762313242,
+      "overall_mean": 18.9874937138046,
+      "overall_median": 18.41
+    },
+    "fico_range_low": {
+      "fully_paid_mean": 696.6141446619622,
+      "charged_off_mean": 686.1472476282452,
+      "overall_mean": 694.517811835114,
+      "overall_median": 685.0
+    },
+    "revol_util": {
+      "fully_paid_mean": 51.03221744821307,
+      "charged_off_mean": 54.01759359200136,
+      "overall_mean": 51.63013505364599,
+      "overall_median": 51.4
+    },
+    "credit_history_years": {
+      "fully_paid_mean": 16.893050522321538,
+      "charged_off_mean": 16.083279470244616,
+      "overall_mean": 16.730867820683034,
+      "overall_median": 15.16495550992471
+    },
+    "emp_length_num": {
+      "fully_paid_mean": 5.556823355338038,
+      "charged_off_mean": 5.252684201556553,
+      "overall_mean": 5.495909706340808,
+      "overall_median": 5.0
+    },
+    "open_acc": {
+      "fully_paid_mean": 11.736711814249944,
+      "charged_off_mean": 12.35812077486792,
+      "overall_mean": 11.861168947901378,
+      "overall_median": 11.0
+    },
+    "pub_rec": {
+      "fully_paid_mean": 0.235886637832916,
+      "charged_off_mean": 0.28199738680906666,
+      "overall_mean": 0.24512179859143712,
+      "overall_median": 0.0
+    },
+    "delinq_2yrs": {
+      "fully_paid_mean": 0.3420213976781243,
+      "charged_off_mean": 0.3845935351928649,
+      "overall_mean": 0.3505478376625593,
+      "overall_median": 0.0
+    },
+    "inq_last_6mths": {
+      "fully_paid_mean": 0.5569513999544731,
+      "charged_off_mean": 0.767312389933534,
+      "overall_mean": 0.5990829550238363,
+      "overall_median": 0.0
+    },
+    "mort_acc": {
+      "fully_paid_mean": 1.701784088322331,
+      "charged_off_mean": 1.3785718343464182,
+      "overall_mean": 1.637050437473689,
+      "overall_median": 1.0
+    }
+  },
+  "correlation_with_default": {
+    "int_rate": 0.30780223293001996,
+    "fico_range_low": -0.134629270796608,
+    "dti": 0.10645104424932915,
+    "inq_last_6mths": 0.09498153147321431,
+    "loan_amnt": 0.07231449585098347,
+    "mort_acc": -0.06660656185342681,
+    "revol_util": 0.049516872037478614,
+    "open_acc": 0.04392420338273755,
+    "credit_history_years": -0.04223074755866493,
+    "annual_inc": -0.03754460900122595,
+    "emp_length_num": -0.03041912367932938,
+    "pub_rec": 0.02560579751706,
+    "delinq_2yrs": 0.018336120074881092
+  }
+}

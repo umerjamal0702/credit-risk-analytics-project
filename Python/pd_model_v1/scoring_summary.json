@@ -1,0 +1,204 @@
+{
+  "n_scored": 11402,
+  "avg_pd": 0.33016163669575854,
+  "total_exposure": 228484775.0,
+  "total_expected_loss_upper_bound": 74082350.51025242,
+  "risk_band_counts": {
+    "1 - Low": 157,
+    "2 - Low-Medium": 844,
+    "3 - Medium": 1688,
+    "4 - Medium-High": 2497,
+    "5 - High": 3429,
+    "6 - Very High": 2787
+  },
+  "risk_band_exposure": {
+    "1 - Low": 3030600.0,
+    "2 - Low-Medium": 17289700.0,
+    "3 - Medium": 35539600.0,
+    "4 - Medium-High": 52305000.0,
+    "5 - High": 67963250.0,
+    "6 - Very High": 52356625.0
+  },
+  "top20_highest_risk": [
+    {
+      "id": 65875967,
+      "loan_amnt": 16525.0,
+      "grade": "F",
+      "sub_grade": "F5",
+      "purpose": "debt_consolidation",
+      "pd": 0.8157767763321627,
+      "risk_band": "6 - Very High"
+    },
+    {
+      "id": 65607978,
+      "loan_amnt": 11100.0,
+      "grade": "G",
+      "sub_grade": "G3",
+      "purpose": "small_business",
+      "pd": 0.7956729901826327,
+      "risk_band": "6 - Very High"
+    },
+    {
+      "id": 67325233,
+      "loan_amnt": 24000.0,
+      "grade": "E",
+      "sub_grade": "E3",
+      "purpose": "debt_consolidation",
+      "pd": 0.7941274568522639,
+      "risk_band": "6 - Very High"
+    },
+    {
+      "id": 66423766,
+      "loan_amnt": 18000.0,
+      "grade": "D",
+      "sub_grade": "D3",
+      "purpose": "debt_consolidation",
+      "pd": 0.773714863207658,
+      "risk_band": "6 - Very High"
+    },
+    {
+      "id": 68062119,
+      "loan_amnt": 14000.0,
+      "grade": "E",
+      "sub_grade": "E2",
+      "purpose": "house",
+      "pd": 0.7736616285880263,
+      "risk_band": "6 - Very High"
+    },
+    {
+      "id": 65595586,
+      "loan_amnt": 14000.0,
+      "grade": "E",
+      "sub_grade": "E1",
+      "purpose": "debt_consolidation",
+      "pd": 0.7694095254501322,
+      "risk_band": "6 - Very High"
+    },
+    {
+      "id": 64711889,
+      "loan_amnt": 21825.0,
+      "grade": "E",
+      "sub_grade": "E4",
+      "purpose": "credit_card",
+      "pd": 0.7684850616952643,
+      "risk_band": "6 - Very High"
+    },
+    {
+      "id": 64400205,
+      "loan_amnt": 13100.0,
+      "grade": "E",
+      "sub_grade": "E4",
+      "purpose": "credit_card",
+      "pd": 0.7668378214816214,
+      "risk_band": "6 - Very High"
+    },
+    {
+      "id": 63290632,
+      "loan_amnt": 24200.0,
+      "grade": "F",
+      "sub_grade": "F3",
+      "purpose": "debt_consolidation",
+      "pd": 0.7665166012705623,
+      "risk_band": "6 - Very High"
+    },
+    {
+      "id": 68574887,
+      "loan_amnt": 25000.0,
+      "grade": "E",
+      "sub_grade": "E2",
+      "purpose": "small_business",
+      "pd": 0.7632617655501788,
+      "risk_band": "6 - Very High"
+    },
+    {
+      "id": 63844524,
+      "loan_amnt": 24725.0,
+      "grade": "F",
+      "sub_grade": "F4",
+      "purpose": "small_business",
+      "pd": 0.7627343121692503,
+      "risk_band": "6 - Very High"
+    },
+    {
+      "id": 65412129,
+      "loan_amnt": 14400.0,
+      "grade": "E",
+      "sub_grade": "E5",
+      "purpose": "debt_consolidation",
+      "pd": 0.7627331463733634,
+      "risk_band": "6 - Very High"
+    },
+    {
+      "id": 63485385,
+      "loan_amnt": 10850.0,
+      "grade": "F",
+      "sub_grade": "F3",
+      "purpose": "debt_consolidation",
+      "pd": 0.7620755359136098,
+      "risk_band": "6 - Very High"
+    },
+    {
+      "id": 68603483,
+      "loan_amnt": 25000.0,
+      "grade": "D",
+      "sub_grade": "D4",
+      "purpose": "debt_consolidation",
+      "pd": 0.760238801901003,
+      "risk_band": "6 - Very High"
+    },
+    {
+      "id": 66561734,
+      "loan_amnt": 20000.0,
+      "grade": "D",
+      "sub_grade": "D2",
+      "purpose": "credit_card",
+      "pd": 0.755229506518989,
+      "risk_band": "6 - Very High"
+    },
+    {
+      "id": 62609782,
+      "loan_amnt": 12000.0,
+      "grade": "D",
+      "sub_grade": "D5",
+      "purpose": "debt_consolidation",
+      "pd": 0.7550906884081974,
+      "risk_band": "6 - Very High"
+    },
+    {
+      "id": 62530138,
+      "loan_amnt": 20025.0,
+      "grade": "F",
+      "sub_grade": "F4",
+      "purpose": "debt_consolidation",
+      "pd": 0.7532001726796632,
+      "risk_band": "6 - Very High"
+    },
+    {
+      "id": 66470944,
+      "loan_amnt": 22825.0,
+      "grade": "F",
+      "sub_grade": "F2",
+      "purpose": "debt_consolidation",
+      "pd": 0.7531494345807446,
+      "risk_band": "6 - Very High"
+    },
+    {
+      "id": 63304344,
+      "loan_amnt": 35000.0,
+      "grade": "F",
+      "sub_grade": "F3",
+      "purpose": "debt_consolidation",
+      "pd": 0.7516394707435353,
+      "risk_band": "6 - Very High"
+    },
+    {
+      "id": 65159594,
+      "loan_amnt": 18250.0,
+      "grade": "F",
+      "sub_grade": "F5",
+      "purpose": "debt_consolidation",
+      "pd": 0.751614669724543,
+      "risk_band": "6 - Very High"
+    }
+  ]
+}

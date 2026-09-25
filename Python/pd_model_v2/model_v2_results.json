@@ -1,0 +1,269 @@
+{
+  "best_model": "hist_gradient_boosting",
+  "results": {
+    "logistic_regression": {
+      "auc": 0.7049572668274537,
+      "ks": 0.29886866328999173,
+      "brier": 0.2170009888667586,
+      "train_seconds": 14.775864124298096,
+      "decile_table": [
+        {
+          "decile": 1,
+          "n": 24502,
+          "avg_pd": 0.13242892039165827,
+          "actual_default_rate": 0.04318014855930128,
+          "lift": 0.20009047941857597
+        },
+        {
+          "decile": 2,
+          "n": 24501,
+          "avg_pd": 0.23615134174888253,
+          "actual_default_rate": 0.0814660626096894,
+          "lift": 0.37750179348109786
+        },
+        {
+          "decile": 3,
+          "n": 24502,
+          "avg_pd": 0.3140706373551914,
+          "actual_default_rate": 0.11619459635948086,
+          "lift": 0.5384287286433703
+        },
+        {
+          "decile": 4,
+          "n": 24501,
+          "avg_pd": 0.37798131144913244,
+          "actual_default_rate": 0.1523203134565936,
+          "lift": 0.7058300066490266
+        },
+        {
+          "decile": 5,
+          "n": 24502,
+          "avg_pd": 0.43452311605919186,
+          "actual_default_rate": 0.18210758305444452,
+          "lift": 0.8438598479826899
+        },
+        {
+          "decile": 6,
+          "n": 24501,
+          "avg_pd": 0.487504689364956,
+          "actual_default_rate": 0.2191339129015142,
+          "lift": 1.015434433466941
+        },
+        {
+          "decile": 7,
+          "n": 24501,
+          "avg_pd": 0.5400234219097213,
+          "actual_default_rate": 0.2621117505407943,
+          "lift": 1.2145874337352758
+        },
+        {
+          "decile": 8,
+          "n": 24502,
+          "avg_pd": 0.5964768872836402,
+          "actual_default_rate": 0.29871030936250104,
+          "lift": 1.3841797909872944
+        },
+        {
+          "decile": 9,
+          "n": 24501,
+          "avg_pd": 0.6644485191164281,
+          "actual_default_rate": 0.3493734949593894,
+          "lift": 1.618945567233566
+        },
+        {
+          "decile": 10,
+          "n": 24502,
+          "avg_pd": 0.7744642482288214,
+          "actual_default_rate": 0.453432372867521,
+          "lift": 2.101139155331171
+        }
+      ]
+    },
+    "hist_gradient_boosting": {
+      "auc": 0.7162557864992551,
+      "ks": 0.3149501114853949,
+      "brier": 0.15253122853975035,
+      "train_seconds": 177.66437077522278,
+      "decile_table": [
+        {
+          "decile": 1,
+          "n": 24502,
+          "avg_pd": 0.03517983658891104,
+          "actual_default_rate": 0.03771120724838788,
+          "lift": 0.17474820697803797
+        },
+        {
+          "decile": 2,
+          "n": 24501,
+          "avg_pd": 0.06946988542979395,
+          "actual_default_rate": 0.0775478551895841,
+          "lift": 0.35934539459623543
+        },
+        {
+          "decile": 3,
+          "n": 24502,
+          "avg_pd": 0.10076180016901216,
+          "actual_default_rate": 0.11358256468859684,
+          "lift": 0.5263249567314715
+        },
+        {
+          "decile": 4,
+          "n": 24501,
+          "avg_pd": 0.13051783198563705,
+          "actual_default_rate": 0.14366760540386106,
+          "lift": 0.6657346257782888
+        },
+        {
+          "decile": 5,
+          "n": 24502,
+          "avg_pd": 0.16061979413756275,
+          "actual_default_rate": 0.17884254346583953,
+          "lift": 0.8287301330928165
+        },
+        {
+          "decile": 6,
+          "n": 24501,
+          "avg_pd": 0.1930803089146897,
+          "actual_default_rate": 0.21595036937267867,
+          "lift": 1.0006823593729903
+        },
+        {
+          "decile": 7,
+          "n": 24501,
+          "avg_pd": 0.23089722803912519,
+          "actual_default_rate": 0.25301008122117463,
+          "lift": 1.1724116321589806
+        },
+        {
+          "decile": 8,
+          "n": 24502,
+          "avg_pd": 0.28005433657231477,
+          "actual_default_rate": 0.3044241286425598,
+          "lift": 1.410656792044573
+        },
+        {
+          "decile": 9,
+          "n": 24501,
+          "avg_pd": 0.3524886300528797,
+          "actual_default_rate": 0.3593322721521571,
+          "lift": 1.6650930810659248
+        },
+        {
+          "decile": 10,
+          "n": 24502,
+          "avg_pd": 0.4988433690811361,
+          "actual_default_rate": 0.47396130928087504,
+          "lift": 2.19626723770125
+        }
+      ]
+    },
+    "top_permutation_importance": [
+      {
+        "feature": "int_rate",
+        "importance": 0.04424473201685906
+      },
+      {
+        "feature": "term_months",
+        "importance": 0.010032084185745105
+      },
+      {
+        "feature": "loan_amnt",
+        "importance": 0.007806592810806534
+      },
+      {
+        "feature": "dti",
+        "importance": 0.006281194324561623
+      },
+      {
+        "feature": "annual_inc",
+        "importance": 0.005035432422611707
+      },
+      {
+        "feature": "fico_range_low",
+        "importance": 0.002704437125276615
+      },
+      {
+        "feature": "mort_acc",
+        "importance": 0.002599329299877029
+      },
+      {
+        "feature": "installment",
+        "importance": 0.0025775992343878506
+      },
+      {
+        "feature": "mo_sin_old_rev_tl_op",
+        "importance": 0.002244606673872429
+      },
+      {
+        "feature": "home_ownership_RENT",
+        "importance": 0.0022176589187045126
+      },
+      {
+        "feature": "emp_length_years",
+        "importance": 0.001927740919665455
+      },
+      {
+        "feature": "avg_cur_bal",
+        "importance": 0.0017300819384539201
+      },
+      {
+        "feature": "acc_open_past_24mths",
+        "importance": 0.0017163080272641462
+      },
+      {
+        "feature": "grade_B",
+        "importance": 0.0016112291524757127
+      },
+      {
+        "feature": "home_ownership_MORTGAGE",
+        "importance": 0.0015909847797096477
+      },
+      {
+        "feature": "delinq_2yrs",
+        "importance": 0.0012486174849517528
+      },
+      {
+        "feature": "total_bc_limit",
+        "importance": 0.0012233067552467115
+      },
+      {
+        "feature": "inq_last_6mths",
+        "importance": 0.0011667359452596005
+      },
+      {
+        "feature": "total_acc",
+        "importance": 0.0010534969459571552
+      },
+      {
+        "feature": "credit_history_years",
+        "importance": 0.0009434438298105086
+      },
+      {
+        "feature": "addr_state_CO",
+        "importance": 0.0008991665020374074
+      },
+      {
+        "feature": "num_actv_rev_tl",
+        "importance": 0.0008787339502992708
+      },
+      {
+        "feature": "total_il_high_credit_limit",
+        "importance": 0.0008683262056160546
+      },
+      {
+        "feature": "revol_bal",
+        "importance": 0.0008504084092313402
+      },
+      {
+        "feature": "grade_C",
+        "importance": 0.0007600088101972658
+      }
+    ]
+  },
+  "v1_comparison_note": {
+    "note": "v1 trained on an 87,891-row 2015-only sample with a RANDOM 80/20 split (not out-of-time); v2 trains on 1,103,084 loans (2007-2016) and tests out-of-time on 245,015 loans (2017-2018) \u2014 a materially harder, more realistic validation."
+  },
+  "n_train": 1103084,
+  "n_test": 245015,
+  "elapsed_sec": 392.1794595718384
+}

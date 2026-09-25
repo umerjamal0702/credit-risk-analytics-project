@@ -1,0 +1,371 @@
+{
+  "sample_sizes": {
+    "accepted_sampled": 322952,
+    "rejected_sampled": 300529
+  },
+  "data_quality_note": {
+    "emp_length_pct_under_1yr_accepted": 0.0840188032331632,
+    "emp_length_pct_under_1yr_rejected": 0.8302123735679405,
+    "finding": "emp_length in the rejected-applications file is ~83% defaulted to '< 1 year', vs a roughly uniform spread in the accepted file \u2014 treated as a data artifact and excluded from the headline acceptance model."
+  },
+  "models": {
+    "headline_no_emp_length": {
+      "label": "Acceptance model \u2014 headline (amount, DTI, year, state; emp_length excluded as artifact)",
+      "n": 600992,
+      "auc": 0.6715822814817114,
+      "top_coefficients": [
+        {
+          "feature": "dti_pct",
+          "coef": -0.49901495645388316
+        },
+        {
+          "feature": "app_year",
+          "coef": -0.3612526882279116
+        },
+        {
+          "feature": "amount_requested",
+          "coef": 0.33239759177173955
+        },
+        {
+          "feature": "state_AL",
+          "coef": -0.04444244944880496
+        },
+        {
+          "feature": "state_MS",
+          "coef": -0.04068158561647487
+        },
+        {
+          "feature": "state_MN",
+          "coef": 0.0387380758997954
+        },
+        {
+          "feature": "state_CA",
+          "coef": 0.03794677039673728
+        },
+        {
+          "feature": "state_SC",
+          "coef": -0.031087665511834423
+        },
+        {
+          "feature": "state_NV",
+          "coef": 0.02984096984674723
+        },
+        {
+          "feature": "state_LA",
+          "coef": -0.029153807645727548
+        },
+        {
+          "feature": "state_CO",
+          "coef": 0.025913367716674362
+        },
+        {
+          "feature": "state_TN",
+          "coef": -0.025360546125738678
+        },
+        {
+          "feature": "state_GA",
+          "coef": -0.024564912921810553
+        },
+        {
+          "feature": "state_AR",
+          "coef": -0.02446504615463706
+        },
+        {
+          "feature": "state_CT",
+          "coef": 0.02315437358149806
+        }
+      ]
+    },
+    "with_credit_score": {
+      "label": "Acceptance model \u2014 WITH credit_score_proxy (subset where populated, emp_length excluded)",
+      "n": 418300,
+      "auc": 0.8553433940818149,
+      "top_coefficients": [
+        {
+          "feature": "credit_score_proxy",
+          "coef": 1.8377829252969602
+        },
+        {
+          "feature": "dti_pct",
+          "coef": -0.5090880351840178
+        },
+        {
+          "feature": "app_year",
+          "coef": 0.22140034410147533
+        },
+        {
+          "feature": "state_MN",
+          "coef": 0.031689131439774906
+        },
+        {
+          "feature": "state_NV",
+          "coef": 0.030029462086449413
+        },
+        {
+          "feature": "state_LA",
+          "coef": -0.022481914604223698
+        },
+        {
+          "feature": "state_AL",
+          "coef": -0.021595230120064354
+        },
+        {
+          "feature": "state_AR",
+          "coef": -0.02153240658005877
+        },
+        {
+          "feature": "state_MS",
+          "coef": -0.021264268333755103
+        },
+        {
+          "feature": "state_SC",
+          "coef": -0.02081131740582201
+        },
+        {
+          "feature": "state_PA",
+          "coef": -0.020493632050203242
+        },
+        {
+          "feature": "state_NY",
+          "coef": -0.018971065615713344
+        },
+        {
+          "feature": "state_IL",
+          "coef": 0.018953635380053332
+        },
+        {
+          "feature": "state_FL",
+          "coef": -0.018463027819888626
+        },
+        {
+          "feature": "state_CT",
+          "coef": 0.018370923104408368
+        }
+      ]
+    },
+    "emp_length_included_caution": {
+      "label": "Acceptance model \u2014 WITH emp_length (inflated by the data artifact above, for comparison only)",
+      "n": 570630,
+      "auc": 0.9075906506535071,
+      "top_coefficients": [
+        {
+          "feature": "emp_length_years",
+          "coef": 2.0754815400485667
+        },
+        {
+          "feature": "dti_pct",
+          "coef": -0.4448858260793033
+        },
+        {
+          "feature": "amount_requested",
+          "coef": 0.26635400014656024
+        },
+        {
+          "feature": "app_year",
+          "coef": -0.2614751314951488
+        },
+        {
+          "feature": "state_AL",
+          "coef": -0.05817769369912895
+        },
+        {
+          "feature": "state_MS",
+          "coef": -0.04856762526119522
+        },
+        {
+          "feature": "state_CO",
+          "coef": 0.045484444757412666
+        },
+        {
+          "feature": "state_CA",
+          "coef": 0.04291452643881524
+        },
+        {
+          "feature": "state_MN",
+          "coef": 0.04184392939678269
+        },
+        {
+          "feature": "state_SC",
+          "coef": -0.03638057064697397
+        },
+        {
+          "feature": "state_AR",
+          "coef": -0.03486100751307032
+        },
+        {
+          "feature": "state_NV",
+          "coef": 0.03028628909472603
+        },
+        {
+          "feature": "state_LA",
+          "coef": -0.029988013271114833
+        },
+        {
+          "feature": "state_GA",
+          "coef": -0.029335057569487143
+        },
+        {
+          "feature": "state_HI",
+          "coef": -0.029024950318436188
+        }
+      ]
+    }
+  },
+  "profile_by_year": [
+    {
+      "app_year": 2008,
+      "outcome": "rejected",
+      "n": 251,
+      "avg_dti": 19.345059760956175,
+      "avg_amount": 9490.936254980079
+    },
+    {
+      "app_year": 2008,
+      "outcome": "accepted",
+      "n": 342,
+      "avg_dti": 13.111988304093568,
+      "avg_amount": 8516.959064327486
+    },
+    {
+      "app_year": 2009,
+      "outcome": "rejected",
+      "n": 517,
+      "avg_dti": 20.824023210831722,
+      "avg_amount": 10440.473887814313
+    },
+    {
+      "app_year": 2009,
+      "outcome": "accepted",
+      "n": 754,
+      "avg_dti": 12.193328912466844,
+      "avg_amount": 9999.535809018567
+    },
+    {
+      "app_year": 2010,
+      "outcome": "rejected",
+      "n": 1148,
+      "avg_dti": 20.597578397212544,
+      "avg_amount": 11232.20818815331
+    },
+    {
+      "app_year": 2010,
+      "outcome": "accepted",
+      "n": 1793,
+      "avg_dti": 13.187016174010038,
+      "avg_amount": 10591.954824316788
+    },
+    {
+      "app_year": 2011,
+      "outcome": "rejected",
+      "n": 2223,
+      "avg_dti": 18.53605038236617,
+      "avg_amount": 12940.575798470536
+    },
+    {
+      "app_year": 2011,
+      "outcome": "accepted",
+      "n": 3101,
+      "avg_dti": 13.92603676233473,
+      "avg_amount": 12058.851983231216
+    },
+    {
+      "app_year": 2012,
+      "outcome": "rejected",
+      "n": 3538,
+      "avg_dti": 20.54209157716224,
+      "avg_amount": 14061.970039570379
+    },
+    {
+      "app_year": 2012,
+      "outcome": "accepted",
+      "n": 7624,
+      "avg_dti": 16.756416579223504,
+      "avg_amount": 13426.121458551941
+    },
+    {
+      "app_year": 2013,
+      "outcome": "rejected",
+      "n": 7940,
+      "avg_dti": 21.35069773299748,
+      "avg_amount": 13379.278967254408
+    },
+    {
+      "app_year": 2013,
+      "outcome": "accepted",
+      "n": 19259,
+      "avg_dti": 17.187805701230594,
+      "avg_amount": 14674.139363414508
+    },
+    {
+      "app_year": 2014,
+      "outcome": "rejected",
+      "n": 17853,
+      "avg_dti": 21.51497395395732,
+      "avg_amount": 12083.467764521369
+    },
+    {
+      "app_year": 2014,
+      "outcome": "accepted",
+      "n": 33661,
+      "avg_dti": 17.96812126793619,
+      "avg_amount": 14914.01696325124
+    },
+    {
+      "app_year": 2015,
+      "outcome": "rejected",
+      "n": 27569,
+      "avg_dti": 23.16887845043346,
+      "avg_amount": 12556.198991621024
+    },
+    {
+      "app_year": 2015,
+      "outcome": "accepted",
+      "n": 60154,
+      "avg_dti": 19.14051501147056,
+      "avg_amount": 15276.350699870332
+    },
+    {
+      "app_year": 2016,
+      "outcome": "rejected",
+      "n": 47141,
+      "avg_dti": 23.909589317154918,
+      "avg_amount": 12378.532487643453
+    },
+    {
+      "app_year": 2016,
+      "outcome": "accepted",
+      "n": 62031,
+      "avg_dti": 18.80495607035192,
+      "avg_amount": 14773.821556963454
+    },
+    {
+      "app_year": 2017,
+      "outcome": "rejected",
+      "n": 71184,
+      "avg_dti": 27.321478703079343,
+      "avg_amount": 12067.868832883794
+    },
+    {
+      "app_year": 2017,
+      "outcome": "accepted",
+      "n": 63183,
+      "avg_dti": 18.80409682984347,
+      "avg_amount": 14819.159821470965
+    },
+    {
+      "app_year": 2018,
+      "outcome": "rejected",
+      "n": 99343,
+      "avg_dti": 30.238769213734233,
+      "avg_amount": 12692.161249408615
+    },
+    {
+      "app_year": 2018,
+      "outcome": "accepted",
+      "n": 70383,
+      "avg_dti": 18.925864058082208,
+      "avg_amount": 16029.98096131168
+    }
+  ],
+  "elapsed_sec": 7.127099275588989
+}
