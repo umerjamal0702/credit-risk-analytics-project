@@ -66,7 +66,7 @@ A ten-sheet analytical workbook built on a 250,000-loan sample, with a stated ob
 Two generations of PD model were built:
 
 - **v1** — built on an 87,891-loan sample from a single 2015 vintage using a random 75/25 train/test split
-- **v2** — trained on 1,103,084 loans issued 2007 to 2016 and tested out-of-time on 245,015 loans issued 2017 to 2018
+- **v2** — trained on 1,122,460 loans issued 2007 to 2016 and tested out-of-time on 225,639 loans issued 2017 to 2018
 
 Out-of-time validation is the standard used in real credit risk model validation, because a random split allows loans from the same vintage to share economic conditions across training and test data, which overstates performance.
 
@@ -94,15 +94,15 @@ A Power BI data extract and build guide are included, with a star-schema fact ta
 
 | Metric | v1 (random split) | v2 (out-of-time) |
 |----------|----------|----------|
-| Training loans | 65,918 | 1,103,084 |
-| Test loans | 21,973 | 245,015 |
-| AUC | 74.4% | 71.6% |
-| KS Statistic | 36.0% | 31.5% |
-| Brier Score | 0.139 | 0.153 |
+| Training loans | 65,918 | 1,122,460 |
+| Test loans | 21,973 | 225,639 |
+| AUC | 74.4% | 71.8% |
+| KS Statistic | 36.0% | 31.8% |
+| Brier Score | 0.139 | 0.151 |
 
 **Selected Model:** HistGradientBoostingClassifier
 
-Both generations used a Logistic Regression baseline and a gradient boosting model, with gradient boosting selected in each case. The v2 model scores lower than v1 despite training on twelve times more data, because out-of-time validation is a harder and more realistic test. The v1 figures are closer to what a random split reports than to what the model would deliver in production.
+Both generations used a Logistic Regression baseline and a gradient boosting model, with gradient boosting selected in each case. The v2 model scores lower than v1 despite training on seventeen times more data, because out-of-time validation is a harder and more realistic test. The v1 figures are closer to what a random split reports than to what the model would deliver in production.
 
 ---
 
@@ -112,6 +112,7 @@ Both generations used a Logistic Regression baseline and a gradient boosting mod
 - The overall portfolio default rate across all resolved loans is 20.0%.
 - Loss given default is approximately 90% across every risk grade. Recoveries through collections return only 10.0% to 11.6% of the unpaid balance, and this is remarkably stable regardless of borrower quality.
 - Interest rate, loan term, loan amount and debt-to-income ratio are the strongest predictors of default.
+- The model is well calibrated on unseen data. Across six risk bands on the out-of-time test set, predicted probability tracks the actual default rate closely, from 3.9% predicted against 4.1% actual in the lowest band to 53.1% predicted against 50.6% actual in the highest.
 - Exposure concentration and risk concentration are not the same. California, Texas and New York carry the largest exposure at $2.89B, $1.67B and $1.57B, but New York defaults at 22.1% against California's 19.6%.
 - Debt-to-income ratio is the strongest legitimate driver of approval decisions, and adding a credit score proxy raises acceptance model AUC from 67.2% to 85.5%.
 

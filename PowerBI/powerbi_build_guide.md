@@ -1,145 +1,249 @@
-# Power BI Build Guide — Credit Risk Portfolio Dashboard
+# Power BI Build Guide — Credit Risk Dashboards
 
-This session can't drive Power BI Desktop directly (no local access to your machine's
-apps), so this is a data extract plus a step-by-step guide for you to assemble the
-dashboard yourself. Everything below was generated from, and validated against, the
-SQLite warehouse built in Phase 1 (2.26M accepted + 27.6M rejected loan applications,
-2007-2018).
+This is a data extract plus a build guide. The dashboard itself has to be assembled
+in Power BI Desktop on your machine, so this document specifies exactly what to build:
+the data model, the measures, and the visuals on each page.
 
-## 1. Files in this delivery
+Everything here was generated from and validated against the SQL warehouse
+(2.26M accepted loans, 27.6M declined applications, 2007–2018).
 
-| File | Grain | Rows | Use |
-|---|---|---|---|
-| `fact_loan_performance_part{1,2,3}of3.csv.gz` | 1 row per resolved loan (split into 3 files for file-size limits) | 449,367 / 449,367 / 449,365 | Main fact table — import all 3 and append |
-| `dim_date.csv` | 1 row per month, 2007-01 to 2018-12 | 144 | Date dimension for time intelligence |
-| `agg_vintage_default_trend.csv` | 1 row per issue year | 12 | Pre-aggregated — optional shortcut |
-| `agg_grade_scorecard.csv` | 1 row per grade | 7 | Pre-aggregated — optional shortcut |
-| `agg_recovery_by_grade.csv` | 1 row per grade | 7 | Pre-aggregated — optional shortcut |
-| `agg_monthly_trend.csv` | 1 row per month | 139 | Pre-aggregated — optional shortcut |
-| `agg_state_risk.csv` | 1 row per state (top 50 by volume) | 50 | Pre-aggregated — optional shortcut |
-| `agg_purpose_grade_risk.csv` | 1 row per grade x purpose | 68 | Pre-aggregated — optional shortcut |
-| `agg_acceptance_funnel_by_state_year.csv` | 1 row per state x year | 490 | Underwriting funnel |
+---
 
-Unzip all three `fact_loan_performance_part*of3.csv.gz` files before importing —
-Power BI's CSV connector doesn't read gzip directly. They're split only because of a
-file-transfer size limit; in Power Query, import all 3 as separate queries and use
-**Append Queries** (or **Combine Files** if you put them in one folder) to stitch
-them back into a single `fact_loan_performance` table before building anything else.
-The `agg_*` tables are optional: they let you build a
-dashboard fast without writing DAX first, but the real portfolio value is building
-the same numbers as **measures** on the fact table (see step 3) — that's what an
-interviewer will actually ask you to walk through.
+## How many dashboards
 
-## 2. Import & model
+**One .pbix file with three pages.**
 
-1. **Get Data → Text/CSV** → import `fact_loan_performance.csv` and `dim_date.csv`
-   (and any `agg_*` tables you want as a quick-start).
-2. In Power Query, check types: `issue_yyyymm` and `dim_date[yyyymm]` should both be
-   **Text** (they're the join key, "YYYY-MM"); `dim_date[date]` should be **Date**.
-3. **Model view** → create a relationship: `dim_date[yyyymm]` (one) → 
-   `fact_loan_performance[issue_yyyymm]` (many).
+The project answers three different questions for three different audiences, and each
+one deserves its own page. They do not belong on one crowded canvas, and splitting
+them further would pad the report rather than strengthen it.
+
+| Page | Question it answers | Audience |
+|----------|----------|----------|
+| 1. Portfolio Performance | How is the loan book we already hold performing? | Credit risk monitoring |
+| 2. Underwriting Funnel | Who applies, who gets approved, and how has that changed? | Underwriting and growth |
+| 3. Model and Risk Segmentation | Can we predict default, and how much do we expect to lose? | Risk analytics and model validation |
+
+An earlier draft of this guide proposed six pages. That was too many. Vintage trends,
+grade performance, recovery rates and state exposure are all the same question
+(portfolio performance) sliced four ways, so they belong together on page 1 as
+separate visuals rather than as four thin pages.
+
+---
+
+## Data files
+
+### Fact tables
+
+| File | Grain | Rows | Used on |
+|----------|----------|----------|----------|
+| fact_loan_performance_part{1,2,3}of3.csv | One resolved loan | 1,348,099 | Page 1 |
+| fact_scored_loans.csv | One scored loan from the out-of-time test set | 225,639 | Page 3 |
+
+### Dimension table
+
+| File | Grain | Rows |
+|----------|----------|----------|
+| dim_date.csv | One month, 2007-01 to 2018-12 | 144 |
+
+### Pre-aggregated tables
+
+| File | Grain | Rows | Used on |
+|----------|----------|----------|----------|
+| agg_vintage_default_trend.csv | Issue year | 12 | Page 1 |
+| agg_grade_scorecard.csv | Grade | 7 | Page 1 |
+| agg_recovery_by_grade.csv | Grade | 7 | Page 1 |
+| agg_state_risk.csv | State | 50 | Page 1 |
+| agg_monthly_trend.csv | Issue month | 139 | Page 1 |
+| agg_purpose_grade_risk.csv | Grade x purpose | 68 | Page 1 |
+| agg_application_volume.csv | Application year | 11 | Page 2 |
+| agg_acceptance_funnel_by_state_year.csv | State x year | 490 | Page 2 |
+| agg_accept_reject_profile.csv | Year x outcome | 22 | Page 2 |
+| agg_model_calibration.csv | Risk decile | 10 | Page 3 |
+| agg_risk_band_summary.csv | Risk band | 6 | Page 3 |
+
+The aggregate tables let you build a working dashboard quickly, but the measures in
+the next section are the part worth showing an interviewer. Build those on the fact
+tables rather than relying only on pre-computed columns.
+
+---
+
+## Import and model
+
+1. **Get Data → Text/CSV** for each file. The three `fact_loan_performance` parts are
+   split only for file-size limits: import all three and use **Append Queries** to
+   combine them into a single table named `fact_loan_performance`.
+2. Check data types. `issue_yyyymm` and `dim_date[yyyymm]` must both be **Text** (they
+   are the join key, formatted "YYYY-MM"). `dim_date[date]` must be **Date**.
+3. Create relationships, both one-to-many from the date table:
+   - `dim_date[yyyymm]` → `fact_loan_performance[issue_yyyymm]`
+   - `dim_date[yyyymm]` → `fact_scored_loans[issue_yyyymm]`
 4. Right-click `dim_date` → **Mark as date table**, using the `date` column. This
-   unlocks time-intelligence DAX functions (`SAMEPERIODLASTYEAR`, `DATEADD`, etc.)
-   later if you extend the model.
-5. Hide the raw `agg_*` tables' underlying columns you don't need for slicing, or
-   just leave them as standalone quick-reference tables — either is fine for a
-   portfolio piece as long as you can explain the choice.
+   enables time intelligence functions.
+5. Leave the `agg_` tables unrelated to the rest of the model. They are standalone
+   summary tables, and connecting them would create ambiguous filter paths.
 
-## 3. Core DAX measures (build these on `fact_loan_performance`)
+---
+
+## Measures
+
+### Portfolio measures (on `fact_loan_performance`)
 
 ```
-Total Loans            = COUNTROWS(fact_loan_performance)
-Total Funded            = SUM(fact_loan_performance[funded_amnt])
-Total Defaults          = SUM(fact_loan_performance[default_flag])
-Default Rate            = DIVIDE([Total Defaults], [Total Loans])
-Total Net Loss           = SUM(fact_loan_performance[net_loss])
-Loss Rate (% of Funded)  = DIVIDE([Total Net Loss], [Total Funded])
+Total Loans = COUNTROWS(fact_loan_performance)
+
+Total Funded = SUM(fact_loan_performance[funded_amnt])
+
+Total Defaults = SUM(fact_loan_performance[default_flag])
+
+Default Rate = DIVIDE([Total Defaults], [Total Loans])
+
+Total Net Loss = SUM(fact_loan_performance[net_loss])
+
+Loss Rate = DIVIDE([Total Net Loss], [Total Funded])
+
 Weighted Avg Interest Rate =
     DIVIDE(
-        SUMX(fact_loan_performance, fact_loan_performance[int_rate] * fact_loan_performance[funded_amnt]),
+        SUMX(fact_loan_performance,
+             fact_loan_performance[int_rate] * fact_loan_performance[funded_amnt]),
         [Total Funded]
     )
+
 Avg FICO =
     AVERAGEX(
         fact_loan_performance,
         (fact_loan_performance[fico_range_low] + fact_loan_performance[fico_range_high]) / 2
     )
-Recovery Rate (Defaults Only) =
+
+Recovery Rate =
     DIVIDE(
-        CALCULATE(SUM(fact_loan_performance[recoveries]), fact_loan_performance[default_flag] = 1),
-        CALCULATE(SUM(fact_loan_performance[funded_amnt]) - SUM(fact_loan_performance[total_rec_prncp]),
-                   fact_loan_performance[default_flag] = 1)
+        CALCULATE(SUM(fact_loan_performance[recoveries]),
+                  fact_loan_performance[default_flag] = 1),
+        CALCULATE(SUM(fact_loan_performance[funded_amnt])
+                  - SUM(fact_loan_performance[total_rec_prncp]),
+                  fact_loan_performance[default_flag] = 1)
     )
-```
 
-(`recoveries` and `total_rec_prncp` are included in `fact_loan_performance.csv.gz`
-specifically so this measure works live; `agg_recovery_by_grade.csv` has the same
-number pre-computed by grade if you'd rather use that directly.)
+Implied LGD = 1 - [Recovery Rate]
 
-Once `dim_date` is marked as a date table, add:
-```
 Default Rate YoY =
     VAR CurrentRate = [Default Rate]
     VAR PriorRate = CALCULATE([Default Rate], SAMEPERIODLASTYEAR(dim_date[date]))
     RETURN CurrentRate - PriorRate
 ```
 
-## 4. Suggested pages & visuals
+### Model measures (on `fact_scored_loans`)
 
-**Page 1 — Portfolio Overview**
-- KPI cards: Total Loans, Total Funded, Default Rate, Loss Rate, Weighted Avg
-  Interest Rate.
-- Line chart: `issue_yyyymm` (x-axis) vs Total Funded and Default Rate (dual axis,
-  or two stacked charts) — use `agg_monthly_trend.csv` or the fact table + dim_date.
-- Slicers: issue_year, grade, purpose.
+```
+Loans Scored = COUNTROWS(fact_scored_loans)
 
-**Page 2 — Vintage / Cohort Analysis**
-- Line chart: issue_year vs default_rate_pct, with the 3-year moving average as a
-  second series (from `agg_vintage_default_trend.csv` — this is the "does credit
-  quality drift over time" story; the 2008 crisis cohort and the 2015-2017 rise are
-  worth calling out explicitly in the write-up).
+Avg Predicted PD = AVERAGE(fact_scored_loans[predicted_pd])
 
-**Page 3 — Grade & Purpose Risk**
-- Bar chart: default rate by grade (`agg_grade_scorecard.csv`), ordered A→G — should
-  climb monotonically; a break in that pattern is worth investigating.
-- Matrix or heatmap: grade x purpose default rate (`agg_purpose_grade_risk.csv`) —
-  shows which purposes are riskiest *within* a grade band, i.e. after controlling for
-  the risk grade LendingClub already assigned.
+Actual Default Rate = DIVIDE(SUM(fact_scored_loans[actual_default]), [Loans Scored])
 
-**Page 4 — Recovery / Loss Given Default**
-- Bar chart: recovery rate by grade, and implied LGD (100 - recovery rate) by grade
-  (`agg_recovery_by_grade.csv`). Call out that implied LGD is close to ~90% across
-  all grades — informs a more realistic expected-loss assumption than a flat 100%.
+Calibration Gap = [Avg Predicted PD] - [Actual Default Rate]
 
-**Page 5 — Underwriting Funnel (accepted vs rejected)**
-- Map or bar chart: acceptance rate by state (`agg_acceptance_funnel_by_state_year.csv`),
-  with a year slicer.
-- Optional: bring in the accept/reject model result (headline AUC 0.67 on DTI +
-  amount + year + state alone, 0.86 with the credit-score proxy) as a text box —
-  this is where you talk through the reject-inference angle and the employment-length
-  data-quality catch (see the case-study writeup for the full finding).
+Expected Loss = SUM(fact_scored_loans[expected_loss])
 
-**Page 6 — State Exposure**
-- Filled map: total_exposure by state (`agg_state_risk.csv`).
-- Table: state, n_loans, total_exposure, default_rate_pct, ranked by exposure —
-  useful for a "where is concentration risk" narrative.
+Actual Loss = SUM(fact_scored_loans[actual_loss_proxy])
 
-## 5. Refresh
+Exposure Scored = SUM(fact_scored_loans[funded_amnt])
+```
 
-This is a static extract (a snapshot of the SQLite warehouse). For a "scheduled
-refresh" story in an interview, you can describe the intended production path
-honestly: Power BI Desktop → publish to the Power BI Service → a gateway or
-cloud data source connection to the warehouse (Postgres/Snowflake/etc. in a real
-deployment) → scheduled refresh. Framing it as "here's the pipeline design, and
-here's a static extract of it running end-to-end" is a perfectly credible answer
-for a portfolio piece — don't overclaim a live refresh that isn't actually wired up.
+`expected_loss` is already calculated in the extract as
+`predicted_pd × funded_amnt × 0.90`, using the 90% loss given default measured from
+actual recovery data rather than an assumption.
 
-## 6. What this demonstrates in an interview
+---
 
-- A modeled star-ish schema (fact + date dimension), not just a flat pasted table.
-- DAX measures built from first principles (`DIVIDE`, `SUMX`, `CALCULATE`,
-  `SAMEPERIODLASTYEAR`) rather than only pre-aggregated columns.
-- A narrative that ties back to the SQL warehouse and the PD model — the same
-  numbers (default rate, LGD, vintage trend) show up consistently across the SQL
-  queries, the Python model, and this dashboard, which is exactly the kind of
-  cross-checked consistency a hiring manager looks for.
+## Page 1 — Portfolio Performance
+
+**KPI cards:** Total Loans · Total Funded · Default Rate · Loss Rate · Weighted Avg
+Interest Rate
+
+**Visuals:**
+
+- **Line chart** — default rate by issue year, with the three-year moving average as a
+  second series. Source: `agg_vintage_default_trend`. This is the credit cycle story:
+  elevated in 2008–2009, falling through 2010–2013, rising again from 2014.
+- **Column chart** — default rate by grade (A to G, in that order, not sorted by
+  value). Should climb monotonically from 6.0% to 49.7%. Add loss rate as a second
+  series to show that losses rise faster than default counts.
+- **Filled map** — total exposure by state, with default rate on the tooltip. Source:
+  `agg_state_risk`.
+- **Matrix** — grade (rows) by purpose (columns), default rate as values, conditional
+  formatting on a colour scale. Source: `agg_purpose_grade_risk`.
+- **Bar chart** — recovery rate and implied LGD by grade. Source:
+  `agg_recovery_by_grade`. The flatness is the point: recoveries return only 10% to
+  11.6% regardless of borrower quality.
+
+**Slicers:** issue year, grade, purpose
+
+---
+
+## Page 2 — Underwriting Funnel
+
+**KPI cards:** Total Applications · Accepted · Acceptance Rate · Rejected
+
+**Visuals:**
+
+- **Combo chart** — application volume as columns and acceptance rate as a line, by
+  year. Source: `agg_application_volume`. This is the strongest single chart in the
+  project: applications grew from 896K in 2013 to 9.99M in 2018 while the acceptance
+  rate fell from 15.1% to 5.0%.
+- **Filled map** — acceptance rate by state, with a year slicer. Source:
+  `agg_acceptance_funnel_by_state_year`.
+- **Clustered column chart** — average DTI for accepted versus rejected applicants by
+  year. Source: `agg_accept_reject_profile`. Rejected applicants consistently carry
+  higher debt-to-income, which is the clearest legitimate driver of the decision.
+- **Text box** — note the acceptance model result (AUC 0.672 on amount, DTI, year and
+  state; 0.855 once a credit score proxy is added) and the employment-length data
+  quality finding.
+
+**Slicers:** application year, state
+
+---
+
+## Page 3 — Model and Risk Segmentation
+
+**KPI cards:** Loans Scored · Avg Predicted PD · Actual Default Rate · Expected Loss ·
+Actual Loss
+
+**Visuals:**
+
+- **Line chart** — predicted PD versus actual default rate across the ten risk
+  deciles. Source: `agg_model_calibration`. The two lines should track closely, which
+  is what calibration means and is more informative than a single AUC number.
+- **Column chart** — loan count by risk band, with exposure on a second axis. Source:
+  `agg_risk_band_summary`.
+- **Clustered column chart** — expected loss versus actual loss by risk band. Source:
+  `agg_risk_band_summary`. Across the whole test set the model expects $662.6M against
+  $693.2M actual, so it under-predicts losses by roughly 4%, which is worth stating
+  plainly rather than hiding.
+- **Table** — highest-risk scored loans: loan ID, grade, purpose, state, funded amount,
+  predicted PD, risk band, expected loss. Sort descending by predicted PD, top 20.
+  Source: `fact_scored_loans`.
+
+**Slicers:** grade, risk band, state
+
+**Important framing:** every loan on this page is from the out-of-time test set, which
+the model never saw during training. Say so on the page. A model scoring loans it was
+trained on would look far better and mean far less.
+
+---
+
+## Refresh
+
+This is a static extract. If asked about production refresh, describe the intended
+path honestly: Power BI Desktop → publish to the Power BI Service → gateway or cloud
+connection to the warehouse → scheduled refresh. Presenting a design alongside a
+working static extract is a credible answer. Claiming a live refresh that is not
+wired up is not.
+
+---
+
+## What to capture for the repository
+
+Screenshot each of the three pages and save them into `PowerBI/` as
+`page1_portfolio_performance.png`, `page2_underwriting_funnel.png` and
+`page3_model_segmentation.png`, then embed them in the project README under the
+relevant workflow sections.

@@ -1,9 +1,9 @@
 {
   "n_read_total": 2260701,
-  "n_train": 1103084,
-  "n_test": 245015,
-  "train_default_rate": 0.19625431970729337,
-  "test_default_rate": 0.2158031140950554,
+  "n_train": 1122460,
+  "n_test": 225639,
+  "train_default_rate": 0.1971713914081571,
+  "test_default_rate": 0.21291975234777677,
   "n_features": 176,
   "dropped_for_missingness": [
     "mths_since_last_record",
@@ -199,5 +199,5 @@
     "application_type_Individual",
     "application_type_Joint App"
   ],
-  "elapsed_sec": 55.5682852268219
+  "elapsed_sec": 90.58939814567566
 }

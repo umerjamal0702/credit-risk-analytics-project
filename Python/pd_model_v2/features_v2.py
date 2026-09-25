@@ -12,7 +12,6 @@ import numpy as np
 import time, json
 
 
-import os
 from pathlib import Path
 
 # Resolve paths relative to the repository root so the script runs anywhere
@@ -75,11 +74,16 @@ MONTHS = {m: i+1 for i, m in enumerate(
     ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'])}
 
 def parse_mon_year(series):
-    # vectorized "Mon-YYYY" -> yyyymm integer
+    # Vectorized "Mon-YYYY" -> months-since-year-0 integer.
+    # The month is zero-indexed (mon - 1) so that integer-dividing the result
+    # by 12 recovers the calendar year for every month. With a 1-indexed month,
+    # December would divide up into the following year and land in the wrong
+    # side of the train/test split. Differences between two parsed dates are
+    # unaffected by the offset, so credit_history_years is unchanged.
     parts = series.astype(str).str.split('-', expand=True)
     mon = parts[0].map(MONTHS)
     yr = pd.to_numeric(parts[1], errors='coerce')
-    return yr * 12 + mon
+    return yr * 12 + (mon - 1)
 
 EMP_MAP = {f'{i} years': i for i in range(2, 10)}
 EMP_MAP.update({'1 year': 1, '10+ years': 10, '< 1 year': 0})
