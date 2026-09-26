@@ -84,9 +84,9 @@ This analysis also surfaced a data quality issue. Employment length is recorded 
 
 ![Credit Risk Monitor](Dashboard/dashboard_preview.png)
 
-An interactive monitoring dashboard covering risk band distribution, grade comparison, model calibration by decile, and a high-risk loan watchlist, alongside a written methodology report.
+An interactive dashboard built as a self-contained HTML page generated from Python, with charts drawn as inline SVG rather than through a charting library. It reports the v2 model against the 225,639 loans in the out-of-time test set, so every predicted figure is shown beside the outcome that actually occurred: predicted versus actual default rate by grade, calibration across risk deciles, risk band distribution, and a watchlist of the twenty highest-risk loans with a column recording whether each one really defaulted (fifteen of the twenty did).
 
-A Power BI data extract and build guide are included, with a star-schema fact table, date dimension, pre-aggregated summary tables, and specified DAX measures.
+A Power BI data extract and build guide are also included, specifying a three-page report with the data model, DAX measures and visuals for each page. The Power BI dashboard itself is not built in this repository.
 
 ---
 

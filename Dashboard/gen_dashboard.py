@@ -34,8 +34,13 @@ def pct(v, digits=1):
 
 # ---------- SVG chart builders ----------
 
-ORDINAL_BLUE = ["#9ec5f4", "#6da7ec", "#3987e5", "#2a78d6", "#1c5cab", "#104281"]  # 6 steps light
-ORDINAL_BLUE_DARK = ["#6da7ec", "#5598e7", "#3987e5", "#2a78d6", "#1c5cab", "#104281"]
+# Sequential ramp for the ordinal risk bands: one hue, light -> dark.
+# Dark mode gets its own steps rather than reusing the light ones: on the dark
+# surface the two darkest light-mode steps fall to 2.3:1 and 1.5:1 against the
+# bar track, so the High and Very High bars nearly vanish. These steps are
+# shifted lighter so every band clears 3:1 while the ramp stays monotonic.
+ORDINAL_BLUE = ["#9ec5f4", "#6da7ec", "#3987e5", "#2a78d6", "#1c5cab", "#104281"]
+ORDINAL_BLUE_DARK = ["#cfe2fa", "#a9cbf6", "#7fb0f0", "#5598e7", "#3987e5", "#2a78d6"]
 
 def risk_band_chart():
     W, H = 620, 320
@@ -52,7 +57,7 @@ def risk_band_chart():
         w = plot_w * b['count'] / max_count
         color = f"var(--band-{i})"
         bars.append(f'''
-        <g class="rb-bar" data-tip="{b['band']}: {b['count']:,} loans &middot; {money(b['exposure'])} exposure &middot; avg PD {pct(b['avg_pd'])}">
+        <g class="rb-bar" data-tip="{b['band']}: {b['count']:,} loans &middot; {money(b['exposure'])} exposure &middot; predicted PD {pct(b['avg_pd'])} vs actual {pct(b['actual_rate'])}">
           <rect x="{pad_l}" y="{y}" width="{plot_w}" height="{bar_h}" fill="var(--track)" rx="4"/>
           <rect x="{pad_l}" y="{y}" width="{w:.1f}" height="{bar_h}" fill="{color}" rx="4"/>
           <text x="{pad_l-10}" y="{y+bar_h/2+4}" text-anchor="end" class="axis-label">{b['band'].split(' - ')[1]}</text>
@@ -68,7 +73,7 @@ def grade_chart():
     n = len(grade_comp)
     group_w = plot_w / n
     bar_w = 16
-    max_v = max(max(g['historical_default_rate'], g['current_avg_pd']) for g in grade_comp) * 1.15
+    max_v = max(max(g['predicted_pd'], g['actual_rate']) for g in grade_comp) * 1.15
     bars = []
     gridlines = []
     for gy in [0, 0.25, 0.5, 0.75]:
@@ -77,19 +82,19 @@ def grade_chart():
         gridlines.append(f'<line x1="{pad_l}" x2="{W-pad_r}" y1="{y:.1f}" y2="{y:.1f}" class="gridline"/><text x="{pad_l-6}" y="{y+3:.1f}" text-anchor="end" class="axis-label">{gy*100:.0f}%</text>')
     for i, g in enumerate(grade_comp):
         cx = pad_l + i*group_w + group_w/2
-        h1 = (g['historical_default_rate']/max_v)*plot_h
-        h2 = (g['current_avg_pd']/max_v)*plot_h
+        h1 = (g['predicted_pd']/max_v)*plot_h
+        h2 = (g['actual_rate']/max_v)*plot_h
         x1 = cx - bar_w - 2
         x2 = cx + 2
         y1 = pad_t + plot_h - h1
         y2 = pad_t + plot_h - h2
         bars.append(f'''
-        <g class="grade-bar" data-tip="Grade {g['grade']}: historical default {pct(g['historical_default_rate'])} &middot; current avg PD {pct(g['current_avg_pd'])} ({g['current_count']:,} active loans)">
+        <g class="grade-bar" data-tip="Grade {g['grade']}: predicted PD {pct(g['predicted_pd'])} &middot; actual default rate {pct(g['actual_rate'])} ({g['count']:,} loans)">
           <rect x="{x1:.1f}" y="{y1:.1f}" width="{bar_w}" height="{h1:.1f}" fill="var(--series-1)" rx="3"/>
           <rect x="{x2:.1f}" y="{y2:.1f}" width="{bar_w}" height="{h2:.1f}" fill="var(--series-2)" rx="3"/>
           <text x="{cx:.1f}" y="{pad_t+plot_h+18}" text-anchor="middle" class="axis-label">{g['grade']}</text>
         </g>''')
-    return f'<svg viewBox="0 0 {W} {H}" class="chart-svg" role="img" aria-label="Historical default rate vs current average PD by grade">{"".join(gridlines)}{"".join(bars)}</svg>'
+    return f'<svg viewBox="0 0 {W} {H}" class="chart-svg" role="img" aria-label="Predicted PD vs actual default rate by grade">{"".join(gridlines)}{"".join(bars)}</svg>'
 
 def lift_chart():
     W, H = 620, 320
@@ -151,7 +156,7 @@ def purpose_chart():
           <text x="{pad_l-8}" y="{y+bar_h/2+4}" text-anchor="end" class="axis-label">{p['purpose'].replace('_',' ').title()}</text>
           <text x="{pad_l+w+8}" y="{y+bar_h/2+4}" class="val-label">{pct(p['rate'])}</text>
         </g>''')
-    return f'<svg viewBox="0 0 {W} {H}" class="chart-svg" role="img" aria-label="Historical default rate by loan purpose">{"".join(bars)}</svg>'
+    return f'<svg viewBox="0 0 {W} {H}" class="chart-svg" role="img" aria-label="Actual default rate by loan purpose">{"".join(bars)}</svg>'
 
 def watchlist_rows():
     rows = []
@@ -166,6 +171,7 @@ def watchlist_rows():
           <td class="mono num">{pct(w['pd'])}</td>
           <td><span class="band-chip band-{band_idx}">{w['risk_band'].split(' - ')[1]}</span></td>
           <td class="mono num">{money(w['expected_loss'],1)}</td>
+          <td>{'<span class="outcome-bad">Defaulted</span>' if w['actual_default'] else '<span class="outcome-ok">Repaid</span>'}</td>
         </tr>''')
     return "".join(rows)
 
@@ -296,6 +302,8 @@ th:last-child, td.num {{ text-align: right; }}
 
 .footer {{ margin-top: 20px; font-size: 12px; color: var(--text-muted); border-top: 1px solid var(--gridline); padding-top: 14px; }}
 
+.outcome-bad {{ color: var(--series-2); font-weight: 600; }}
+.outcome-ok {{ color: var(--text-muted); }}
 #tooltip {{
   position: fixed; pointer-events: none; z-index: 50;
   background: var(--text-primary); color: var(--surface-1);
@@ -306,14 +314,14 @@ th:last-child, td.num {{ text-align: right; }}
 </style>
 
 <div class="page-header">
-  <div class="eyebrow">Portfolio &middot; PD Model v1</div>
+  <div class="eyebrow">Portfolio &middot; PD Model v2 &middot; Out-of-time validation</div>
   <h1>Credit Risk Monitor</h1>
-  <p>Active loan book scored for probability of default &middot; {kpi['n_training']:,}-loan training population &middot; generated from HistGradientBoosting PD model</p>
+  <p>{kpi['n_scored']:,} loans issued 2017&ndash;2018, scored by a model trained on {kpi['n_training']:,} earlier loans it never saw &middot; predictions shown against what actually happened</p>
 </div>
 
 <div class="kpi-row">
   <div class="kpi-tile">
-    <div class="kpi-label">Active loans scored</div>
+    <div class="kpi-label">Loans scored (unseen)</div>
     <div class="kpi-value">{kpi['n_scored']:,}</div>
   </div>
   <div class="kpi-tile">
@@ -321,34 +329,34 @@ th:last-child, td.num {{ text-align: right; }}
     <div class="kpi-value">{money(kpi['total_exposure'])}</div>
   </div>
   <div class="kpi-tile">
-    <div class="kpi-label">Portfolio avg PD</div>
+    <div class="kpi-label">Avg predicted PD</div>
     <div class="kpi-value">{pct(kpi['avg_pd'])}</div>
-    <div class="kpi-sub">vs {pct(kpi['historical_default_rate'])} historical base rate</div>
+    <div class="kpi-sub">actual outcome {pct(kpi['actual_default_rate'])}</div>
   </div>
   <div class="kpi-tile">
-    <div class="kpi-label">Expected loss (LGD 100%)</div>
+    <div class="kpi-label">Expected loss (LGD 90%)</div>
     <div class="kpi-value">{money(kpi['expected_loss'])}</div>
-    <div class="kpi-sub">upper bound, no recovery data</div>
+    <div class="kpi-sub">{money(kpi['actual_loss'])} actual &middot; under by {abs(kpi['expected_loss']/kpi['actual_loss']-1)*100:.1f}%</div>
   </div>
   <div class="kpi-tile">
     <div class="kpi-label">Model AUC / KS</div>
     <div class="kpi-value">{kpi['auc']:.3f}</div>
-    <div class="kpi-sub">KS {kpi['ks']:.3f} &middot; held-out test set</div>
+    <div class="kpi-sub">KS {kpi['ks']:.3f} &middot; out-of-time test set</div>
   </div>
 </div>
 
 <div class="grid-2">
   <div class="card">
-    <h3>Active loans by risk band</h3>
-    <p class="card-sub">{kpi['n_scored']:,} loans currently outstanding, grouped by predicted PD</p>
+    <h3>Loans by predicted risk band</h3>
+    <p class="card-sub">{kpi['n_scored']:,} scored loans grouped by predicted PD &middot; hover for predicted vs actual</p>
     {risk_band_chart()}
   </div>
   <div class="card">
-    <h3>Default rate by grade: historical vs current book</h3>
-    <p class="card-sub">Historical = actual outcomes (training set) &middot; Current = model-predicted avg PD</p>
+    <h3>Predicted vs actual default rate by grade</h3>
+    <p class="card-sub">Both measured on the out-of-time test set the model never trained on</p>
     <div class="legend">
-      <span><span class="swatch" style="background:var(--series-1)"></span>Historical (actual)</span>
-      <span><span class="swatch" style="background:var(--series-2)"></span>Current book (predicted)</span>
+      <span><span class="swatch" style="background:var(--series-1)"></span>Predicted PD</span>
+      <span><span class="swatch" style="background:var(--series-2)"></span>Actual default rate</span>
     </div>
     {grade_chart()}
   </div>
@@ -357,7 +365,7 @@ th:last-child, td.num {{ text-align: right; }}
 <div class="grid-2">
   <div class="card">
     <h3>Model calibration &mdash; lift by decile</h3>
-    <p class="card-sub">Predicted PD tracks actual default rate closely across risk deciles (test set)</p>
+    <p class="card-sub">Predicted PD tracks actual default rate closely across risk deciles</p>
     <div class="legend">
       <span><span class="swatch" style="background:var(--series-1)"></span>Predicted PD</span>
       <span><span class="swatch" style="background:var(--series-2)"></span>Actual default rate</span>
@@ -365,20 +373,20 @@ th:last-child, td.num {{ text-align: right; }}
     {lift_chart()}
   </div>
   <div class="card">
-    <h3>Historical default rate by purpose</h3>
-    <p class="card-sub">Training set, sorted highest to lowest risk</p>
+    <h3>Actual default rate by purpose</h3>
+    <p class="card-sub">Out-of-time test set, sorted highest to lowest risk</p>
     {purpose_chart()}
   </div>
 </div>
 
 <div class="card">
-  <h3>Highest-risk active loans (watchlist)</h3>
-  <p class="card-sub">Top 20 by predicted PD, out of {kpi['n_scored']:,} active loans</p>
+  <h3>Highest-risk loans (watchlist)</h3>
+  <p class="card-sub">Top 20 by predicted PD, out of {kpi['n_scored']:,} scored loans &middot; outcome column shows whether the model was right</p>
   <div class="table-wrap">
     <table>
       <thead><tr>
         <th>Loan ID</th><th>Amount</th><th>Grade</th><th>Purpose</th><th>State</th>
-        <th>PD</th><th>Risk band</th><th>Expected loss</th>
+        <th>PD</th><th>Risk band</th><th>Expected loss</th><th>Outcome</th>
       </tr></thead>
       <tbody>{watchlist_rows()}</tbody>
     </table>
@@ -386,7 +394,7 @@ th:last-child, td.num {{ text-align: right; }}
 </div>
 
 <div class="footer">
-  PD model: HistGradientBoostingClassifier, trained on {kpi['n_training']:,} completed loans (Fully Paid / Charged Off), validated on a 25% held-out test set. Origination-time features only &mdash; post-origination fields (received payments, updated FICO) excluded to prevent leakage. Expected loss assumes 100% loss given default (no recovery data available), so is a conservative upper bound. Full methodology in the accompanying report and Excel workbook.
+  PD model v2: HistGradientBoostingClassifier trained on {kpi['n_training']:,} loans issued up to 2016 and validated <strong>out-of-time</strong> on {kpi['n_scored']:,} loans issued 2017&ndash;2018 &mdash; the model never saw any of the loans shown here during training. Origination-time features only; post-origination fields (received payments, recoveries, updated FICO, hardship flags) are excluded to prevent leakage. Expected loss applies a 90% loss given default, measured from actual recovery data rather than assumed. Full methodology in the project README.
 </div>
 
 <div id="tooltip"></div>

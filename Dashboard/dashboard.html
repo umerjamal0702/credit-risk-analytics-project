@@ -42,12 +42,12 @@
     --warning: #fab219;
     --serious: #ec835a;
     --critical: #e66767;
-  --band-0: #6da7ec;
-  --band-1: #5598e7;
-  --band-2: #3987e5;
-  --band-3: #2a78d6;
-  --band-4: #1c5cab;
-  --band-5: #104281;
+  --band-0: #cfe2fa;
+  --band-1: #a9cbf6;
+  --band-2: #7fb0f0;
+  --band-3: #5598e7;
+  --band-4: #3987e5;
+  --band-5: #2a78d6;
   }
 }
 :root[data-theme="dark"] {
@@ -66,12 +66,12 @@
   --warning: #fab219;
   --serious: #ec835a;
   --critical: #e66767;
-  --band-0: #6da7ec;
-  --band-1: #5598e7;
-  --band-2: #3987e5;
-  --band-3: #2a78d6;
-  --band-4: #1c5cab;
-  --band-5: #104281;
+  --band-0: #cfe2fa;
+  --band-1: #a9cbf6;
+  --band-2: #7fb0f0;
+  --band-3: #5598e7;
+  --band-4: #3987e5;
+  --band-5: #2a78d6;
 }
 
 * { box-sizing: border-box; }
@@ -137,6 +137,8 @@ th:last-child, td.num { text-align: right; }
 
 .footer { margin-top: 20px; font-size: 12px; color: var(--text-muted); border-top: 1px solid var(--gridline); padding-top: 14px; }
 
+.outcome-bad { color: var(--series-2); font-weight: 600; }
+.outcome-ok { color: var(--text-muted); }
 #tooltip {
   position: fixed; pointer-events: none; z-index: 50;
   background: var(--text-primary); color: var(--surface-1);
@@ -147,120 +149,120 @@ th:last-child, td.num { text-align: right; }
 </style>
 
 <div class="page-header">
-  <div class="eyebrow">Portfolio &middot; PD Model v1</div>
+  <div class="eyebrow">Portfolio &middot; PD Model v2 &middot; Out-of-time validation</div>
   <h1>Credit Risk Monitor</h1>
-  <p>Active loan book scored for probability of default &middot; 87,891-loan training population &middot; generated from HistGradientBoosting PD model</p>
+  <p>225,639 loans issued 2017&ndash;2018, scored by a model trained on 1,122,460 earlier loans it never saw &middot; predictions shown against what actually happened</p>
 </div>
 
 <div class="kpi-row">
   <div class="kpi-tile">
-    <div class="kpi-label">Active loans scored</div>
-    <div class="kpi-value">11,402</div>
+    <div class="kpi-label">Loans scored (unseen)</div>
+    <div class="kpi-value">225,639</div>
   </div>
   <div class="kpi-tile">
     <div class="kpi-label">Total exposure</div>
-    <div class="kpi-value">$228.5M</div>
+    <div class="kpi-value">$3.3B</div>
   </div>
   <div class="kpi-tile">
-    <div class="kpi-label">Portfolio avg PD</div>
-    <div class="kpi-value">33.0%</div>
-    <div class="kpi-sub">vs 20.0% historical base rate</div>
+    <div class="kpi-label">Avg predicted PD</div>
+    <div class="kpi-value">20.4%</div>
+    <div class="kpi-sub">actual outcome 21.3%</div>
   </div>
   <div class="kpi-tile">
-    <div class="kpi-label">Expected loss (LGD 100%)</div>
-    <div class="kpi-value">$74.1M</div>
-    <div class="kpi-sub">upper bound, no recovery data</div>
+    <div class="kpi-label">Expected loss (LGD 90%)</div>
+    <div class="kpi-value">$662.6M</div>
+    <div class="kpi-sub">$693.2M actual &middot; under by 4.4%</div>
   </div>
   <div class="kpi-tile">
     <div class="kpi-label">Model AUC / KS</div>
-    <div class="kpi-value">0.744</div>
-    <div class="kpi-sub">KS 0.360 &middot; held-out test set</div>
+    <div class="kpi-value">0.718</div>
+    <div class="kpi-sub">KS 0.318 &middot; out-of-time test set</div>
   </div>
 </div>
 
 <div class="grid-2">
   <div class="card">
-    <h3>Active loans by risk band</h3>
-    <p class="card-sub">11,402 loans currently outstanding, grouped by predicted PD</p>
+    <h3>Loans by predicted risk band</h3>
+    <p class="card-sub">225,639 scored loans grouped by predicted PD &middot; hover for predicted vs actual</p>
     <svg viewBox="0 0 620 320" class="chart-svg" role="img" aria-label="Loan count by risk band">
-        <g class="rb-bar" data-tip="1 - Low: 157 loans &middot; $3.0M exposure &middot; avg PD 4.9%">
+        <g class="rb-bar" data-tip="1 - Low: 27,816 loans &middot; $362.7M exposure &middot; predicted PD 3.9% vs actual 4.1%">
           <rect x="130" y="10.0" width="420" height="24" fill="var(--track)" rx="4"/>
-          <rect x="130" y="10.0" width="19.2" height="24" fill="var(--band-0)" rx="4"/>
+          <rect x="130" y="10.0" width="203.9" height="24" fill="var(--band-0)" rx="4"/>
           <text x="120" y="26.0" text-anchor="end" class="axis-label">Low</text>
-          <text x="157.23009623797026" y="26.0" class="val-label">157</text>
+          <text x="341.8762368462384" y="26.0" class="val-label">27,816</text>
         </g>
-        <g class="rb-bar" data-tip="2 - Low-Medium: 844 loans &middot; $17.3M exposure &middot; avg PD 9.4%">
+        <g class="rb-bar" data-tip="2 - Low-Medium: 43,741 loans &middot; $531.3M exposure &middot; predicted PD 9.0% vs actual 9.9%">
           <rect x="130" y="65.2" width="420" height="24" fill="var(--track)" rx="4"/>
-          <rect x="130" y="65.2" width="103.4" height="24" fill="var(--band-1)" rx="4"/>
+          <rect x="130" y="65.2" width="320.6" height="24" fill="var(--band-1)" rx="4"/>
           <text x="120" y="81.2" text-anchor="end" class="axis-label">Low-Medium</text>
-          <text x="241.37707786526684" y="81.2" class="val-label">844</text>
+          <text x="458.59787445683475" y="81.2" class="val-label">43,741</text>
         </g>
-        <g class="rb-bar" data-tip="3 - Medium: 1,688 loans &middot; $35.5M exposure &middot; avg PD 16.3%">
+        <g class="rb-bar" data-tip="3 - Medium: 57,303 loans &middot; $745.1M exposure &middot; predicted PD 15.9% vs actual 17.4%">
           <rect x="130" y="120.4" width="420" height="24" fill="var(--track)" rx="4"/>
-          <rect x="130" y="120.4" width="206.8" height="24" fill="var(--band-2)" rx="4"/>
+          <rect x="130" y="120.4" width="420.0" height="24" fill="var(--band-2)" rx="4"/>
           <text x="120" y="136.4" text-anchor="end" class="axis-label">Medium</text>
-          <text x="344.7541557305337" y="136.4" class="val-label">1,688</text>
+          <text x="558.0" y="136.4" class="val-label">57,303</text>
         </g>
-        <g class="rb-bar" data-tip="4 - Medium-High: 2,497 loans &middot; $52.3M exposure &middot; avg PD 24.9%">
+        <g class="rb-bar" data-tip="4 - Medium-High: 47,964 loans &middot; $723.8M exposure &middot; predicted PD 24.5% vs actual 26.4%">
           <rect x="130" y="175.60000000000002" width="420" height="24" fill="var(--track)" rx="4"/>
-          <rect x="130" y="175.60000000000002" width="305.8" height="24" fill="var(--band-3)" rx="4"/>
+          <rect x="130" y="175.60000000000002" width="351.6" height="24" fill="var(--band-3)" rx="4"/>
           <text x="120" y="191.60000000000002" text-anchor="end" class="axis-label">Medium-High</text>
-          <text x="443.8442694663167" y="191.60000000000002" class="val-label">2,497</text>
+          <text x="489.5501806188158" y="191.60000000000002" class="val-label">47,964</text>
         </g>
-        <g class="rb-bar" data-tip="5 - High: 3,429 loans &middot; $68.0M exposure &middot; avg PD 37.0%">
+        <g class="rb-bar" data-tip="5 - High: 34,012 loans &middot; $603.4M exposure &middot; predicted PD 36.4% vs actual 36.6%">
           <rect x="130" y="230.8" width="420" height="24" fill="var(--track)" rx="4"/>
-          <rect x="130" y="230.8" width="420.0" height="24" fill="var(--band-4)" rx="4"/>
+          <rect x="130" y="230.8" width="249.3" height="24" fill="var(--band-4)" rx="4"/>
           <text x="120" y="246.8" text-anchor="end" class="axis-label">High</text>
-          <text x="558.0" y="246.8" class="val-label">3,429</text>
+          <text x="387.28956599130936" y="246.8" class="val-label">34,012</text>
         </g>
-        <g class="rb-bar" data-tip="6 - Very High: 2,787 loans &middot; $52.4M exposure &middot; avg PD 54.2%">
+        <g class="rb-bar" data-tip="6 - Very High: 14,803 loans &middot; $293.2M exposure &middot; predicted PD 53.1% vs actual 50.6%">
           <rect x="130" y="286.0" width="420" height="24" fill="var(--track)" rx="4"/>
-          <rect x="130" y="286.0" width="341.4" height="24" fill="var(--band-5)" rx="4"/>
+          <rect x="130" y="286.0" width="108.5" height="24" fill="var(--band-5)" rx="4"/>
           <text x="120" y="302.0" text-anchor="end" class="axis-label">Very High</text>
-          <text x="479.36482939632543" y="302.0" class="val-label">2,787</text>
+          <text x="246.49798439872256" y="302.0" class="val-label">14,803</text>
         </g></svg>
   </div>
   <div class="card">
-    <h3>Default rate by grade: historical vs current book</h3>
-    <p class="card-sub">Historical = actual outcomes (training set) &middot; Current = model-predicted avg PD</p>
+    <h3>Predicted vs actual default rate by grade</h3>
+    <p class="card-sub">Both measured on the out-of-time test set the model never trained on</p>
     <div class="legend">
-      <span><span class="swatch" style="background:var(--series-1)"></span>Historical (actual)</span>
-      <span><span class="swatch" style="background:var(--series-2)"></span>Current book (predicted)</span>
+      <span><span class="swatch" style="background:var(--series-1)"></span>Predicted PD</span>
+      <span><span class="swatch" style="background:var(--series-2)"></span>Actual default rate</span>
     </div>
-    <svg viewBox="0 0 620 320" class="chart-svg" role="img" aria-label="Historical default rate vs current average PD by grade"><line x1="40" x2="610" y1="280.0" y2="280.0" class="gridline"/><text x="34" y="283.0" text-anchor="end" class="axis-label">0%</text><line x1="40" x2="610" y1="184.3" y2="184.3" class="gridline"/><text x="34" y="187.3" text-anchor="end" class="axis-label">25%</text><line x1="40" x2="610" y1="88.6" y2="88.6" class="gridline"/><text x="34" y="91.6" text-anchor="end" class="axis-label">50%</text>
-        <g class="grade-bar" data-tip="Grade A: historical default 5.3% &middot; current avg PD 8.1% (418 active loans)">
-          <rect x="62.7" y="259.6" width="16" height="20.4" fill="var(--series-1)" rx="3"/>
-          <rect x="82.7" y="248.9" width="16" height="31.1" fill="var(--series-2)" rx="3"/>
+    <svg viewBox="0 0 620 320" class="chart-svg" role="img" aria-label="Predicted PD vs actual default rate by grade"><line x1="40" x2="610" y1="280.0" y2="280.0" class="gridline"/><text x="34" y="283.0" text-anchor="end" class="axis-label">0%</text><line x1="40" x2="610" y1="169.9" y2="169.9" class="gridline"/><text x="34" y="172.9" text-anchor="end" class="axis-label">25%</text><line x1="40" x2="610" y1="59.7" y2="59.7" class="gridline"/><text x="34" y="62.7" text-anchor="end" class="axis-label">50%</text>
+        <g class="grade-bar" data-tip="Grade A: predicted PD 5.4% &middot; actual default rate 6.3% (39,710 loans)">
+          <rect x="62.7" y="256.2" width="16" height="23.8" fill="var(--series-1)" rx="3"/>
+          <rect x="82.7" y="252.1" width="16" height="27.9" fill="var(--series-2)" rx="3"/>
           <text x="80.7" y="298" text-anchor="middle" class="axis-label">A</text>
         </g>
-        <g class="grade-bar" data-tip="Grade B: historical default 13.2% &middot; current avg PD 18.2% (2,632 active loans)">
-          <rect x="144.1" y="229.5" width="16" height="50.5" fill="var(--series-1)" rx="3"/>
-          <rect x="164.1" y="210.3" width="16" height="69.7" fill="var(--series-2)" rx="3"/>
+        <g class="grade-bar" data-tip="Grade B: predicted PD 13.4% &middot; actual default rate 14.7% (62,234 loans)">
+          <rect x="144.1" y="221.1" width="16" height="58.9" fill="var(--series-1)" rx="3"/>
+          <rect x="164.1" y="215.0" width="16" height="65.0" fill="var(--series-2)" rx="3"/>
           <text x="162.1" y="298" text-anchor="middle" class="axis-label">B</text>
         </g>
-        <g class="grade-bar" data-tip="Grade C: historical default 23.7% &middot; current avg PD 32.6% (4,447 active loans)">
-          <rect x="225.6" y="189.3" width="16" height="90.7" fill="var(--series-1)" rx="3"/>
-          <rect x="245.6" y="155.3" width="16" height="124.7" fill="var(--series-2)" rx="3"/>
+        <g class="grade-bar" data-tip="Grade C: predicted PD 22.8% &middot; actual default rate 24.6% (69,674 loans)">
+          <rect x="225.6" y="179.5" width="16" height="100.5" fill="var(--series-1)" rx="3"/>
+          <rect x="245.6" y="171.5" width="16" height="108.5" fill="var(--series-2)" rx="3"/>
           <text x="243.6" y="298" text-anchor="middle" class="axis-label">C</text>
         </g>
-        <g class="grade-bar" data-tip="Grade D: historical default 34.5% &middot; current avg PD 43.4% (2,241 active loans)">
-          <rect x="307.0" y="148.0" width="16" height="132.0" fill="var(--series-1)" rx="3"/>
-          <rect x="327.0" y="114.0" width="16" height="166.0" fill="var(--series-2)" rx="3"/>
+        <g class="grade-bar" data-tip="Grade D: predicted PD 32.3% &middot; actual default rate 32.2% (34,196 loans)">
+          <rect x="307.0" y="137.6" width="16" height="142.4" fill="var(--series-1)" rx="3"/>
+          <rect x="327.0" y="138.2" width="16" height="141.8" fill="var(--series-2)" rx="3"/>
           <text x="325.0" y="298" text-anchor="middle" class="axis-label">D</text>
         </g>
-        <g class="grade-bar" data-tip="Grade E: historical default 43.8% &middot; current avg PD 48.6% (1,332 active loans)">
-          <rect x="388.4" y="112.2" width="16" height="167.8" fill="var(--series-1)" rx="3"/>
-          <rect x="408.4" y="93.8" width="16" height="186.2" fill="var(--series-2)" rx="3"/>
+        <g class="grade-bar" data-tip="Grade E: predicted PD 41.0% &middot; actual default rate 38.4% (13,246 loans)">
+          <rect x="388.4" y="99.6" width="16" height="180.4" fill="var(--series-1)" rx="3"/>
+          <rect x="408.4" y="110.9" width="16" height="169.1" fill="var(--series-2)" rx="3"/>
           <text x="406.4" y="298" text-anchor="middle" class="axis-label">E</text>
         </g>
-        <g class="grade-bar" data-tip="Grade F: historical default 52.8% &middot; current avg PD 54.8% (282 active loans)">
-          <rect x="469.9" y="77.8" width="16" height="202.2" fill="var(--series-1)" rx="3"/>
-          <rect x="489.9" y="70.3" width="16" height="209.7" fill="var(--series-2)" rx="3"/>
+        <g class="grade-bar" data-tip="Grade F: predicted PD 49.5% &middot; actual default rate 45.7% (4,309 loans)">
+          <rect x="469.9" y="61.9" width="16" height="218.1" fill="var(--series-1)" rx="3"/>
+          <rect x="489.9" y="78.6" width="16" height="201.4" fill="var(--series-2)" rx="3"/>
           <text x="487.9" y="298" text-anchor="middle" class="axis-label">F</text>
         </g>
-        <g class="grade-bar" data-tip="Grade G: historical default 59.1% &middot; current avg PD 58.2% (50 active loans)">
+        <g class="grade-bar" data-tip="Grade G: predicted PD 51.3% &middot; actual default rate 50.1% (2,270 loans)">
           <rect x="551.3" y="53.9" width="16" height="226.1" fill="var(--series-1)" rx="3"/>
-          <rect x="571.3" y="57.0" width="16" height="223.0" fill="var(--series-2)" rx="3"/>
+          <rect x="571.3" y="59.3" width="16" height="220.7" fill="var(--series-2)" rx="3"/>
           <text x="569.3" y="298" text-anchor="middle" class="axis-label">G</text>
         </g></svg>
   </div>
@@ -269,295 +271,309 @@ th:last-child, td.num { text-align: right; }
 <div class="grid-2">
   <div class="card">
     <h3>Model calibration &mdash; lift by decile</h3>
-    <p class="card-sub">Predicted PD tracks actual default rate closely across risk deciles (test set)</p>
+    <p class="card-sub">Predicted PD tracks actual default rate closely across risk deciles</p>
     <div class="legend">
       <span><span class="swatch" style="background:var(--series-1)"></span>Predicted PD</span>
       <span><span class="swatch" style="background:var(--series-2)"></span>Actual default rate</span>
     </div>
     <svg viewBox="0 0 620 320" class="chart-svg" role="img" aria-label="Predicted PD vs actual default rate by risk decile">
-      <line x1="44" x2="604" y1="286.0" y2="286.0" class="gridline"/><text x="38" y="289.0" text-anchor="end" class="axis-label">0%</text><line x1="44" x2="604" y1="192.5" y2="192.5" class="gridline"/><text x="38" y="195.5" text-anchor="end" class="axis-label">20%</text><line x1="44" x2="604" y1="99.1" y2="99.1" class="gridline"/><text x="38" y="102.1" text-anchor="end" class="axis-label">40%</text>
-      <path d="M 44.0 269.5 L 106.2 257.7 L 168.4 245.3 L 230.7 232.2 L 292.9 218.0 L 355.1 202.5 L 417.3 184.0 L 479.6 158.0 L 541.8 117.8 L 604.0 40.5" fill="none" stroke="var(--series-1)" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
-      <path d="M 44.0 272.4 L 106.2 256.9 L 168.4 244.3 L 230.7 233.2 L 292.9 215.4 L 355.1 200.3 L 417.3 180.7 L 479.6 152.6 L 541.8 121.1 L 604.0 47.0" fill="none" stroke="var(--series-2)" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
-      <circle cx="44.0" cy="269.5" r="4" fill="var(--series-1)" stroke="var(--surface-1)" stroke-width="2" class="dot" data-tip="Decile 1: predicted PD 3.5%"/><circle cx="106.2" cy="257.7" r="4" fill="var(--series-1)" stroke="var(--surface-1)" stroke-width="2" class="dot" data-tip="Decile 2: predicted PD 6.1%"/><circle cx="168.4" cy="245.3" r="4" fill="var(--series-1)" stroke="var(--surface-1)" stroke-width="2" class="dot" data-tip="Decile 3: predicted PD 8.7%"/><circle cx="230.7" cy="232.2" r="4" fill="var(--series-1)" stroke="var(--surface-1)" stroke-width="2" class="dot" data-tip="Decile 4: predicted PD 11.5%"/><circle cx="292.9" cy="218.0" r="4" fill="var(--series-1)" stroke="var(--surface-1)" stroke-width="2" class="dot" data-tip="Decile 5: predicted PD 14.5%"/><circle cx="355.1" cy="202.5" r="4" fill="var(--series-1)" stroke="var(--surface-1)" stroke-width="2" class="dot" data-tip="Decile 6: predicted PD 17.9%"/><circle cx="417.3" cy="184.0" r="4" fill="var(--series-1)" stroke="var(--surface-1)" stroke-width="2" class="dot" data-tip="Decile 7: predicted PD 21.8%"/><circle cx="479.6" cy="158.0" r="4" fill="var(--series-1)" stroke="var(--surface-1)" stroke-width="2" class="dot" data-tip="Decile 8: predicted PD 27.4%"/><circle cx="541.8" cy="117.8" r="4" fill="var(--series-1)" stroke="var(--surface-1)" stroke-width="2" class="dot" data-tip="Decile 9: predicted PD 36.0%"/><circle cx="604.0" cy="40.5" r="4" fill="var(--series-1)" stroke="var(--surface-1)" stroke-width="2" class="dot" data-tip="Decile 10: predicted PD 52.5%"/><circle cx="44.0" cy="272.4" r="4" fill="var(--series-2)" stroke="var(--surface-1)" stroke-width="2" class="dot" data-tip="Decile 1: actual default rate 2.9%"/><circle cx="106.2" cy="256.9" r="4" fill="var(--series-2)" stroke="var(--surface-1)" stroke-width="2" class="dot" data-tip="Decile 2: actual default rate 6.2%"/><circle cx="168.4" cy="244.3" r="4" fill="var(--series-2)" stroke="var(--surface-1)" stroke-width="2" class="dot" data-tip="Decile 3: actual default rate 8.9%"/><circle cx="230.7" cy="233.2" r="4" fill="var(--series-2)" stroke="var(--surface-1)" stroke-width="2" class="dot" data-tip="Decile 4: actual default rate 11.3%"/><circle cx="292.9" cy="215.4" r="4" fill="var(--series-2)" stroke="var(--surface-1)" stroke-width="2" class="dot" data-tip="Decile 5: actual default rate 15.1%"/><circle cx="355.1" cy="200.3" r="4" fill="var(--series-2)" stroke="var(--surface-1)" stroke-width="2" class="dot" data-tip="Decile 6: actual default rate 18.3%"/><circle cx="417.3" cy="180.7" r="4" fill="var(--series-2)" stroke="var(--surface-1)" stroke-width="2" class="dot" data-tip="Decile 7: actual default rate 22.5%"/><circle cx="479.6" cy="152.6" r="4" fill="var(--series-2)" stroke="var(--surface-1)" stroke-width="2" class="dot" data-tip="Decile 8: actual default rate 28.5%"/><circle cx="541.8" cy="121.1" r="4" fill="var(--series-2)" stroke="var(--surface-1)" stroke-width="2" class="dot" data-tip="Decile 9: actual default rate 35.3%"/><circle cx="604.0" cy="47.0" r="4" fill="var(--series-2)" stroke="var(--surface-1)" stroke-width="2" class="dot" data-tip="Decile 10: actual default rate 51.1%"/>
+      <line x1="44" x2="604" y1="286.0" y2="286.0" class="gridline"/><text x="38" y="289.0" text-anchor="end" class="axis-label">0%</text><line x1="44" x2="604" y1="186.7" y2="186.7" class="gridline"/><text x="38" y="189.7" text-anchor="end" class="axis-label">20%</text><line x1="44" x2="604" y1="87.4" y2="87.4" class="gridline"/><text x="38" y="90.4" text-anchor="end" class="axis-label">40%</text>
+      <path d="M 44.0 268.7 L 106.2 251.9 L 168.4 236.5 L 230.7 221.6 L 292.9 206.5 L 355.1 190.2 L 417.3 171.3 L 479.6 146.8 L 541.8 110.9 L 604.0 40.5" fill="none" stroke="var(--series-1)" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+      <path d="M 44.0 268.1 L 106.2 248.5 L 168.4 231.1 L 230.7 216.3 L 292.9 198.3 L 355.1 181.2 L 417.3 162.5 L 479.6 137.5 L 541.8 108.4 L 604.0 51.0" fill="none" stroke="var(--series-2)" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+      <circle cx="44.0" cy="268.7" r="4" fill="var(--series-1)" stroke="var(--surface-1)" stroke-width="2" class="dot" data-tip="Decile 1: predicted PD 3.5%"/><circle cx="106.2" cy="251.9" r="4" fill="var(--series-1)" stroke="var(--surface-1)" stroke-width="2" class="dot" data-tip="Decile 2: predicted PD 6.9%"/><circle cx="168.4" cy="236.5" r="4" fill="var(--series-1)" stroke="var(--surface-1)" stroke-width="2" class="dot" data-tip="Decile 3: predicted PD 10.0%"/><circle cx="230.7" cy="221.6" r="4" fill="var(--series-1)" stroke="var(--surface-1)" stroke-width="2" class="dot" data-tip="Decile 4: predicted PD 13.0%"/><circle cx="292.9" cy="206.5" r="4" fill="var(--series-1)" stroke="var(--surface-1)" stroke-width="2" class="dot" data-tip="Decile 5: predicted PD 16.0%"/><circle cx="355.1" cy="190.2" r="4" fill="var(--series-1)" stroke="var(--surface-1)" stroke-width="2" class="dot" data-tip="Decile 6: predicted PD 19.3%"/><circle cx="417.3" cy="171.3" r="4" fill="var(--series-1)" stroke="var(--surface-1)" stroke-width="2" class="dot" data-tip="Decile 7: predicted PD 23.1%"/><circle cx="479.6" cy="146.8" r="4" fill="var(--series-1)" stroke="var(--surface-1)" stroke-width="2" class="dot" data-tip="Decile 8: predicted PD 28.0%"/><circle cx="541.8" cy="110.9" r="4" fill="var(--series-1)" stroke="var(--surface-1)" stroke-width="2" class="dot" data-tip="Decile 9: predicted PD 35.3%"/><circle cx="604.0" cy="40.5" r="4" fill="var(--series-1)" stroke="var(--surface-1)" stroke-width="2" class="dot" data-tip="Decile 10: predicted PD 49.4%"/><circle cx="44.0" cy="268.1" r="4" fill="var(--series-2)" stroke="var(--surface-1)" stroke-width="2" class="dot" data-tip="Decile 1: actual default rate 3.6%"/><circle cx="106.2" cy="248.5" r="4" fill="var(--series-2)" stroke="var(--surface-1)" stroke-width="2" class="dot" data-tip="Decile 2: actual default rate 7.5%"/><circle cx="168.4" cy="231.1" r="4" fill="var(--series-2)" stroke="var(--surface-1)" stroke-width="2" class="dot" data-tip="Decile 3: actual default rate 11.1%"/><circle cx="230.7" cy="216.3" r="4" fill="var(--series-2)" stroke="var(--surface-1)" stroke-width="2" class="dot" data-tip="Decile 4: actual default rate 14.0%"/><circle cx="292.9" cy="198.3" r="4" fill="var(--series-2)" stroke="var(--surface-1)" stroke-width="2" class="dot" data-tip="Decile 5: actual default rate 17.7%"/><circle cx="355.1" cy="181.2" r="4" fill="var(--series-2)" stroke="var(--surface-1)" stroke-width="2" class="dot" data-tip="Decile 6: actual default rate 21.1%"/><circle cx="417.3" cy="162.5" r="4" fill="var(--series-2)" stroke="var(--surface-1)" stroke-width="2" class="dot" data-tip="Decile 7: actual default rate 24.9%"/><circle cx="479.6" cy="137.5" r="4" fill="var(--series-2)" stroke="var(--surface-1)" stroke-width="2" class="dot" data-tip="Decile 8: actual default rate 29.9%"/><circle cx="541.8" cy="108.4" r="4" fill="var(--series-2)" stroke="var(--surface-1)" stroke-width="2" class="dot" data-tip="Decile 9: actual default rate 35.8%"/><circle cx="604.0" cy="51.0" r="4" fill="var(--series-2)" stroke="var(--surface-1)" stroke-width="2" class="dot" data-tip="Decile 10: actual default rate 47.3%"/>
       <text x="44.0" y="304" text-anchor="middle" class="axis-label">1</text><text x="106.2" y="304" text-anchor="middle" class="axis-label">2</text><text x="168.4" y="304" text-anchor="middle" class="axis-label">3</text><text x="230.7" y="304" text-anchor="middle" class="axis-label">4</text><text x="292.9" y="304" text-anchor="middle" class="axis-label">5</text><text x="355.1" y="304" text-anchor="middle" class="axis-label">6</text><text x="417.3" y="304" text-anchor="middle" class="axis-label">7</text><text x="479.6" y="304" text-anchor="middle" class="axis-label">8</text><text x="541.8" y="304" text-anchor="middle" class="axis-label">9</text><text x="604.0" y="304" text-anchor="middle" class="axis-label">10</text>
       <text x="324.0" y="318" text-anchor="middle" class="axis-label">Risk decile (10 = highest predicted risk)</text>
     </svg>
   </div>
   <div class="card">
-    <h3>Historical default rate by purpose</h3>
-    <p class="card-sub">Training set, sorted highest to lowest risk</p>
-    <svg viewBox="0 0 620 340" class="chart-svg" role="img" aria-label="Historical default rate by loan purpose">
-        <g class="purpose-bar" data-tip="Small Business: 30.0% default rate &middot; 779 loans">
+    <h3>Actual default rate by purpose</h3>
+    <p class="card-sub">Out-of-time test set, sorted highest to lowest risk</p>
+    <svg viewBox="0 0 620 340" class="chart-svg" role="img" aria-label="Actual default rate by loan purpose">
+        <g class="purpose-bar" data-tip="Small Business: 36.1% default rate &middot; 2,368 loans">
           <rect x="150" y="10.0" width="410" height="18" fill="var(--track)" rx="3"/>
           <rect x="150" y="10.0" width="390.5" height="18" fill="var(--series-1)" rx="3"/>
           <text x="142" y="23.0" text-anchor="end" class="axis-label">Small Business</text>
-          <text x="548.4761904761905" y="23.0" class="val-label">30.0%</text>
+          <text x="548.4761904761905" y="23.0" class="val-label">36.1%</text>
         </g>
-        <g class="purpose-bar" data-tip="House: 26.8% default rate &middot; 280 loans">
-          <rect x="150" y="37.45454545454545" width="410" height="18" fill="var(--track)" rx="3"/>
-          <rect x="150" y="37.45454545454545" width="348.2" height="18" fill="var(--series-1)" rx="3"/>
-          <text x="142" y="50.45454545454545" text-anchor="end" class="axis-label">House</text>
-          <text x="506.1924821210535" y="50.45454545454545" class="val-label">26.8%</text>
+        <g class="purpose-bar" data-tip="Moving: 26.2% default rate &middot; 1,994 loans">
+          <rect x="150" y="40.2" width="410" height="18" fill="var(--track)" rx="3"/>
+          <rect x="150" y="40.2" width="283.3" height="18" fill="var(--series-1)" rx="3"/>
+          <text x="142" y="53.2" text-anchor="end" class="axis-label">Moving</text>
+          <text x="441.321169561198" y="53.2" class="val-label">26.2%</text>
         </g>
-        <g class="purpose-bar" data-tip="Moving: 22.7% default rate &middot; 534 loans">
-          <rect x="150" y="64.9090909090909" width="410" height="18" fill="var(--track)" rx="3"/>
-          <rect x="150" y="64.9090909090909" width="294.6" height="18" fill="var(--series-1)" rx="3"/>
-          <text x="142" y="77.9090909090909" text-anchor="end" class="axis-label">Moving</text>
-          <text x="452.5508438017801" y="77.9090909090909" class="val-label">22.7%</text>
+        <g class="purpose-bar" data-tip="Medical: 23.6% default rate &middot; 3,742 loans">
+          <rect x="150" y="70.4" width="410" height="18" fill="var(--track)" rx="3"/>
+          <rect x="150" y="70.4" width="254.9" height="18" fill="var(--series-1)" rx="3"/>
+          <text x="142" y="83.4" text-anchor="end" class="axis-label">Medical</text>
+          <text x="412.8938819072737" y="83.4" class="val-label">23.6%</text>
         </g>
-        <g class="purpose-bar" data-tip="Medical: 22.3% default rate &middot; 1,037 loans">
-          <rect x="150" y="92.36363636363636" width="410" height="18" fill="var(--track)" rx="3"/>
-          <rect x="150" y="92.36363636363636" width="289.6" height="18" fill="var(--series-1)" rx="3"/>
-          <text x="142" y="105.36363636363636" text-anchor="end" class="axis-label">Medical</text>
-          <text x="447.567209817933" y="105.36363636363636" class="val-label">22.3%</text>
+        <g class="purpose-bar" data-tip="Debt Consolidation: 22.3% default rate &middot; 123,790 loans">
+          <rect x="150" y="100.6" width="410" height="18" fill="var(--track)" rx="3"/>
+          <rect x="150" y="100.6" width="240.7" height="18" fill="var(--series-1)" rx="3"/>
+          <text x="142" y="113.6" text-anchor="end" class="axis-label">Debt Consolidation</text>
+          <text x="398.6989369603323" y="113.6" class="val-label">22.3%</text>
         </g>
-        <g class="purpose-bar" data-tip="Debt Consolidation: 21.8% default rate &middot; 49,644 loans">
-          <rect x="150" y="119.81818181818181" width="410" height="18" fill="var(--track)" rx="3"/>
-          <rect x="150" y="119.81818181818181" width="283.7" height="18" fill="var(--series-1)" rx="3"/>
-          <text x="142" y="132.8181818181818" text-anchor="end" class="axis-label">Debt Consolidation</text>
-          <text x="441.6862080315468" y="132.8181818181818" class="val-label">21.8%</text>
+        <g class="purpose-bar" data-tip="Other: 22.3% default rate &middot; 18,135 loans">
+          <rect x="150" y="130.8" width="410" height="18" fill="var(--track)" rx="3"/>
+          <rect x="150" y="130.8" width="240.7" height="18" fill="var(--series-1)" rx="3"/>
+          <text x="142" y="143.8" text-anchor="end" class="axis-label">Other</text>
+          <text x="398.6987204334205" y="143.8" class="val-label">22.3%</text>
         </g>
-        <g class="purpose-bar" data-tip="Renewable Energy: 20.4% default rate &middot; 54 loans">
-          <rect x="150" y="147.27272727272725" width="410" height="18" fill="var(--track)" rx="3"/>
-          <rect x="150" y="147.27272727272725" width="264.8" height="18" fill="var(--series-1)" rx="3"/>
-          <text x="142" y="160.27272727272725" text-anchor="end" class="axis-label">Renewable Energy</text>
-          <text x="422.7982333167518" y="160.27272727272725" class="val-label">20.4%</text>
+        <g class="purpose-bar" data-tip="Major Purchase: 21.7% default rate &middot; 6,097 loans">
+          <rect x="150" y="161.0" width="410" height="18" fill="var(--track)" rx="3"/>
+          <rect x="150" y="161.0" width="234.7" height="18" fill="var(--series-1)" rx="3"/>
+          <text x="142" y="174.0" text-anchor="end" class="axis-label">Major Purchase</text>
+          <text x="392.7481477864277" y="174.0" class="val-label">21.7%</text>
         </g>
-        <g class="purpose-bar" data-tip="Other: 19.3% default rate &middot; 4,908 loans">
-          <rect x="150" y="174.72727272727272" width="410" height="18" fill="var(--track)" rx="3"/>
-          <rect x="150" y="174.72727272727272" width="250.3" height="18" fill="var(--series-1)" rx="3"/>
-          <text x="142" y="187.72727272727272" text-anchor="end" class="axis-label">Other</text>
-          <text x="408.28995047332455" y="187.72727272727272" class="val-label">19.3%</text>
+        <g class="purpose-bar" data-tip="House: 20.7% default rate &middot; 2,279 loans">
+          <rect x="150" y="191.2" width="410" height="18" fill="var(--track)" rx="3"/>
+          <rect x="150" y="191.2" width="223.2" height="18" fill="var(--series-1)" rx="3"/>
+          <text x="142" y="204.2" text-anchor="end" class="axis-label">House</text>
+          <text x="381.2436286263797" y="204.2" class="val-label">20.7%</text>
         </g>
-        <g class="purpose-bar" data-tip="Major Purchase: 19.2% default rate &middot; 1,765 loans">
-          <rect x="150" y="202.1818181818182" width="410" height="18" fill="var(--track)" rx="3"/>
-          <rect x="150" y="202.1818181818182" width="248.9" height="18" fill="var(--series-1)" rx="3"/>
-          <text x="142" y="215.1818181818182" text-anchor="end" class="axis-label">Major Purchase</text>
-          <text x="406.93625312888764" y="215.1818181818182" class="val-label">19.2%</text>
+        <g class="purpose-bar" data-tip="Vacation: 19.9% default rate &middot; 2,239 loans">
+          <rect x="150" y="221.4" width="410" height="18" fill="var(--track)" rx="3"/>
+          <rect x="150" y="221.4" width="215.2" height="18" fill="var(--series-1)" rx="3"/>
+          <text x="142" y="234.4" text-anchor="end" class="axis-label">Vacation</text>
+          <text x="373.1707611538227" y="234.4" class="val-label">19.9%</text>
         </g>
-        <g class="purpose-bar" data-tip="Home Improvement: 17.9% default rate &middot; 5,586 loans">
-          <rect x="150" y="229.63636363636363" width="410" height="18" fill="var(--track)" rx="3"/>
-          <rect x="150" y="229.63636363636363" width="232.7" height="18" fill="var(--series-1)" rx="3"/>
-          <text x="142" y="242.63636363636363" text-anchor="end" class="axis-label">Home Improvement</text>
-          <text x="390.7100966556749" y="242.63636363636363" class="val-label">17.9%</text>
+        <g class="purpose-bar" data-tip="Home Improvement: 18.4% default rate &middot; 18,273 loans">
+          <rect x="150" y="251.6" width="410" height="18" fill="var(--track)" rx="3"/>
+          <rect x="150" y="251.6" width="199.2" height="18" fill="var(--series-1)" rx="3"/>
+          <text x="142" y="264.6" text-anchor="end" class="axis-label">Home Improvement</text>
+          <text x="357.2152302354117" y="264.6" class="val-label">18.4%</text>
         </g>
-        <g class="purpose-bar" data-tip="Vacation: 17.8% default rate &middot; 489 loans">
-          <rect x="150" y="257.09090909090907" width="410" height="18" fill="var(--track)" rx="3"/>
-          <rect x="150" y="257.09090909090907" width="231.3" height="18" fill="var(--series-1)" rx="3"/>
-          <text x="142" y="270.09090909090907" text-anchor="end" class="axis-label">Vacation</text>
-          <text x="389.273861335211" y="270.09090909090907" class="val-label">17.8%</text>
+        <g class="purpose-bar" data-tip="Credit Card: 18.4% default rate &middot; 43,673 loans">
+          <rect x="150" y="281.8" width="410" height="18" fill="var(--track)" rx="3"/>
+          <rect x="150" y="281.8" width="199.2" height="18" fill="var(--series-1)" rx="3"/>
+          <text x="142" y="294.8" text-anchor="end" class="axis-label">Credit Card</text>
+          <text x="357.180658792331" y="294.8" class="val-label">18.4%</text>
         </g>
-        <g class="purpose-bar" data-tip="Credit Card: 16.4% default rate &middot; 22,030 loans">
-          <rect x="150" y="284.5454545454545" width="410" height="18" fill="var(--track)" rx="3"/>
-          <rect x="150" y="284.5454545454545" width="213.0" height="18" fill="var(--series-1)" rx="3"/>
-          <text x="142" y="297.5454545454545" text-anchor="end" class="axis-label">Credit Card</text>
-          <text x="370.9553439449036" y="297.5454545454545" class="val-label">16.4%</text>
-        </g>
-        <g class="purpose-bar" data-tip="Car: 15.0% default rate &middot; 785 loans">
+        <g class="purpose-bar" data-tip="Car: 15.6% default rate &middot; 2,881 loans">
           <rect x="150" y="312.0" width="410" height="18" fill="var(--track)" rx="3"/>
-          <rect x="150" y="312.0" width="195.4" height="18" fill="var(--series-1)" rx="3"/>
+          <rect x="150" y="312.0" width="168.3" height="18" fill="var(--series-1)" rx="3"/>
           <text x="142" y="325.0" text-anchor="end" class="axis-label">Car</text>
-          <text x="353.40177680305067" y="325.0" class="val-label">15.0%</text>
+          <text x="326.3470745134822" y="325.0" class="val-label">15.6%</text>
         </g></svg>
   </div>
 </div>
 
 <div class="card">
-  <h3>Highest-risk active loans (watchlist)</h3>
-  <p class="card-sub">Top 20 by predicted PD, out of 11,402 active loans</p>
+  <h3>Highest-risk loans (watchlist)</h3>
+  <p class="card-sub">Top 20 by predicted PD, out of 225,639 scored loans &middot; outcome column shows whether the model was right</p>
   <div class="table-wrap">
     <table>
       <thead><tr>
         <th>Loan ID</th><th>Amount</th><th>Grade</th><th>Purpose</th><th>State</th>
-        <th>PD</th><th>Risk band</th><th>Expected loss</th>
+        <th>PD</th><th>Risk band</th><th>Expected loss</th><th>Outcome</th>
       </tr></thead>
       <tbody><tr>
-          <td class="mono">65875967</td>
-          <td>$16.5K</td>
-          <td><span class="grade-chip">F5</span></td>
-          <td>Debt Consolidation</td>
-          <td>CA</td>
-          <td class="mono num">81.6%</td>
-          <td><span class="band-chip band-5">Very High</span></td>
-          <td class="mono num">$13.5K</td>
-        </tr><tr>
-          <td class="mono">65607978</td>
-          <td>$11.1K</td>
+          <td class="mono">111757961</td>
+          <td>$15.9K</td>
           <td><span class="grade-chip">G3</span></td>
+          <td>Debt Consolidation</td>
+          <td>NY</td>
+          <td class="mono num">81.3%</td>
+          <td><span class="band-chip band-5">Very High</span></td>
+          <td class="mono num">$11.7K</td>
+          <td><span class="outcome-bad">Defaulted</span></td>
+        </tr><tr>
+          <td class="mono">95886454</td>
+          <td>$32.0K</td>
+          <td><span class="grade-chip">G5</span></td>
           <td>Small Business</td>
-          <td>OR</td>
-          <td class="mono num">79.6%</td>
-          <td><span class="band-chip band-5">Very High</span></td>
-          <td class="mono num">$8.8K</td>
-        </tr><tr>
-          <td class="mono">67325233</td>
-          <td>$24.0K</td>
-          <td><span class="grade-chip">E3</span></td>
-          <td>Debt Consolidation</td>
-          <td>NY</td>
-          <td class="mono num">79.4%</td>
-          <td><span class="band-chip band-5">Very High</span></td>
-          <td class="mono num">$19.1K</td>
-        </tr><tr>
-          <td class="mono">66423766</td>
-          <td>$18.0K</td>
-          <td><span class="grade-chip">D3</span></td>
-          <td>Debt Consolidation</td>
-          <td>NM</td>
-          <td class="mono num">77.4%</td>
-          <td><span class="band-chip band-5">Very High</span></td>
-          <td class="mono num">$13.9K</td>
-        </tr><tr>
-          <td class="mono">68062119</td>
-          <td>$14.0K</td>
-          <td><span class="grade-chip">E2</span></td>
-          <td>House</td>
-          <td>NC</td>
-          <td class="mono num">77.4%</td>
-          <td><span class="band-chip band-5">Very High</span></td>
-          <td class="mono num">$10.8K</td>
-        </tr><tr>
-          <td class="mono">65595586</td>
-          <td>$14.0K</td>
-          <td><span class="grade-chip">E1</span></td>
-          <td>Debt Consolidation</td>
-          <td>NY</td>
-          <td class="mono num">76.9%</td>
-          <td><span class="band-chip band-5">Very High</span></td>
-          <td class="mono num">$10.8K</td>
-        </tr><tr>
-          <td class="mono">64711889</td>
-          <td>$21.8K</td>
-          <td><span class="grade-chip">E4</span></td>
-          <td>Credit Card</td>
-          <td>NE</td>
-          <td class="mono num">76.8%</td>
-          <td><span class="band-chip band-5">Very High</span></td>
-          <td class="mono num">$16.8K</td>
-        </tr><tr>
-          <td class="mono">64400205</td>
-          <td>$13.1K</td>
-          <td><span class="grade-chip">E4</span></td>
-          <td>Credit Card</td>
-          <td>GA</td>
-          <td class="mono num">76.7%</td>
-          <td><span class="band-chip band-5">Very High</span></td>
-          <td class="mono num">$10.0K</td>
-        </tr><tr>
-          <td class="mono">63290632</td>
-          <td>$24.2K</td>
-          <td><span class="grade-chip">F3</span></td>
-          <td>Debt Consolidation</td>
-          <td>AZ</td>
-          <td class="mono num">76.7%</td>
-          <td><span class="band-chip band-5">Very High</span></td>
-          <td class="mono num">$18.5K</td>
-        </tr><tr>
-          <td class="mono">68574887</td>
-          <td>$25.0K</td>
-          <td><span class="grade-chip">E2</span></td>
-          <td>Small Business</td>
-          <td>NY</td>
-          <td class="mono num">76.3%</td>
-          <td><span class="band-chip band-5">Very High</span></td>
-          <td class="mono num">$19.1K</td>
-        </tr><tr>
-          <td class="mono">63844524</td>
-          <td>$24.7K</td>
-          <td><span class="grade-chip">F4</span></td>
-          <td>Small Business</td>
-          <td>SC</td>
-          <td class="mono num">76.3%</td>
-          <td><span class="band-chip band-5">Very High</span></td>
-          <td class="mono num">$18.9K</td>
-        </tr><tr>
-          <td class="mono">65412129</td>
-          <td>$14.4K</td>
-          <td><span class="grade-chip">E5</span></td>
-          <td>Debt Consolidation</td>
-          <td>FL</td>
-          <td class="mono num">76.3%</td>
-          <td><span class="band-chip band-5">Very High</span></td>
-          <td class="mono num">$11.0K</td>
-        </tr><tr>
-          <td class="mono">63485385</td>
-          <td>$10.8K</td>
-          <td><span class="grade-chip">F3</span></td>
-          <td>Debt Consolidation</td>
-          <td>KY</td>
-          <td class="mono num">76.2%</td>
-          <td><span class="band-chip band-5">Very High</span></td>
-          <td class="mono num">$8.3K</td>
-        </tr><tr>
-          <td class="mono">68603483</td>
-          <td>$25.0K</td>
-          <td><span class="grade-chip">D4</span></td>
-          <td>Debt Consolidation</td>
-          <td>NY</td>
-          <td class="mono num">76.0%</td>
-          <td><span class="band-chip band-5">Very High</span></td>
-          <td class="mono num">$19.0K</td>
-        </tr><tr>
-          <td class="mono">66561734</td>
-          <td>$20.0K</td>
-          <td><span class="grade-chip">D2</span></td>
-          <td>Credit Card</td>
           <td>CA</td>
-          <td class="mono num">75.5%</td>
+          <td class="mono num">80.8%</td>
           <td><span class="band-chip band-5">Very High</span></td>
-          <td class="mono num">$15.1K</td>
+          <td class="mono num">$23.3K</td>
+          <td><span class="outcome-ok">Repaid</span></td>
         </tr><tr>
-          <td class="mono">62609782</td>
-          <td>$12.0K</td>
+          <td class="mono">111008192</td>
+          <td>$30.0K</td>
+          <td><span class="grade-chip">G4</span></td>
+          <td>Other</td>
+          <td>CA</td>
+          <td class="mono num">80.0%</td>
+          <td><span class="band-chip band-5">Very High</span></td>
+          <td class="mono num">$21.6K</td>
+          <td><span class="outcome-bad">Defaulted</span></td>
+        </tr><tr>
+          <td class="mono">111976854</td>
+          <td>$25.0K</td>
           <td><span class="grade-chip">D5</span></td>
           <td>Debt Consolidation</td>
-          <td>FL</td>
-          <td class="mono num">75.5%</td>
+          <td>OK</td>
+          <td class="mono num">79.9%</td>
           <td><span class="band-chip band-5">Very High</span></td>
-          <td class="mono num">$9.1K</td>
+          <td class="mono num">$18.0K</td>
+          <td><span class="outcome-ok">Repaid</span></td>
         </tr><tr>
-          <td class="mono">62530138</td>
-          <td>$20.0K</td>
-          <td><span class="grade-chip">F4</span></td>
-          <td>Debt Consolidation</td>
-          <td>CA</td>
-          <td class="mono num">75.3%</td>
-          <td><span class="band-chip band-5">Very High</span></td>
-          <td class="mono num">$15.1K</td>
-        </tr><tr>
-          <td class="mono">66470944</td>
-          <td>$22.8K</td>
-          <td><span class="grade-chip">F2</span></td>
-          <td>Debt Consolidation</td>
-          <td>OH</td>
-          <td class="mono num">75.3%</td>
-          <td><span class="band-chip band-5">Very High</span></td>
-          <td class="mono num">$17.2K</td>
-        </tr><tr>
-          <td class="mono">63304344</td>
-          <td>$35.0K</td>
-          <td><span class="grade-chip">F3</span></td>
-          <td>Debt Consolidation</td>
-          <td>CA</td>
-          <td class="mono num">75.2%</td>
-          <td><span class="band-chip band-5">Very High</span></td>
-          <td class="mono num">$26.3K</td>
-        </tr><tr>
-          <td class="mono">65159594</td>
-          <td>$18.2K</td>
-          <td><span class="grade-chip">F5</span></td>
+          <td class="mono">102648623</td>
+          <td>$25.0K</td>
+          <td><span class="grade-chip">F1</span></td>
           <td>Debt Consolidation</td>
           <td>TX</td>
-          <td class="mono num">75.2%</td>
+          <td class="mono num">79.1%</td>
           <td><span class="band-chip band-5">Very High</span></td>
-          <td class="mono num">$13.7K</td>
+          <td class="mono num">$17.8K</td>
+          <td><span class="outcome-bad">Defaulted</span></td>
+        </tr><tr>
+          <td class="mono">134871757</td>
+          <td>$30.0K</td>
+          <td><span class="grade-chip">E5</span></td>
+          <td>Debt Consolidation</td>
+          <td>PA</td>
+          <td class="mono num">78.8%</td>
+          <td><span class="band-chip band-5">Very High</span></td>
+          <td class="mono num">$21.3K</td>
+          <td><span class="outcome-bad">Defaulted</span></td>
+        </tr><tr>
+          <td class="mono">109786394</td>
+          <td>$30.0K</td>
+          <td><span class="grade-chip">F1</span></td>
+          <td>Debt Consolidation</td>
+          <td>GA</td>
+          <td class="mono num">78.7%</td>
+          <td><span class="band-chip band-5">Very High</span></td>
+          <td class="mono num">$21.3K</td>
+          <td><span class="outcome-bad">Defaulted</span></td>
+        </tr><tr>
+          <td class="mono">110430372</td>
+          <td>$24.0K</td>
+          <td><span class="grade-chip">E1</span></td>
+          <td>Debt Consolidation</td>
+          <td>AR</td>
+          <td class="mono num">78.5%</td>
+          <td><span class="band-chip band-5">Very High</span></td>
+          <td class="mono num">$16.9K</td>
+          <td><span class="outcome-bad">Defaulted</span></td>
+        </tr><tr>
+          <td class="mono">125033188</td>
+          <td>$35.0K</td>
+          <td><span class="grade-chip">G1</span></td>
+          <td>Debt Consolidation</td>
+          <td>TX</td>
+          <td class="mono num">78.2%</td>
+          <td><span class="band-chip band-5">Very High</span></td>
+          <td class="mono num">$24.6K</td>
+          <td><span class="outcome-bad">Defaulted</span></td>
+        </tr><tr>
+          <td class="mono">118162507</td>
+          <td>$35.0K</td>
+          <td><span class="grade-chip">G1</span></td>
+          <td>Debt Consolidation</td>
+          <td>KY</td>
+          <td class="mono num">78.0%</td>
+          <td><span class="band-chip band-5">Very High</span></td>
+          <td class="mono num">$24.6K</td>
+          <td><span class="outcome-bad">Defaulted</span></td>
+        </tr><tr>
+          <td class="mono">111095805</td>
+          <td>$18.0K</td>
+          <td><span class="grade-chip">D5</span></td>
+          <td>Debt Consolidation</td>
+          <td>TX</td>
+          <td class="mono num">77.4%</td>
+          <td><span class="band-chip band-5">Very High</span></td>
+          <td class="mono num">$12.5K</td>
+          <td><span class="outcome-bad">Defaulted</span></td>
+        </tr><tr>
+          <td class="mono">113499400</td>
+          <td>$28.0K</td>
+          <td><span class="grade-chip">G5</span></td>
+          <td>Debt Consolidation</td>
+          <td>CA</td>
+          <td class="mono num">77.4%</td>
+          <td><span class="band-chip band-5">Very High</span></td>
+          <td class="mono num">$19.5K</td>
+          <td><span class="outcome-ok">Repaid</span></td>
+        </tr><tr>
+          <td class="mono">125028022</td>
+          <td>$21.5K</td>
+          <td><span class="grade-chip">E5</span></td>
+          <td>Other</td>
+          <td>NC</td>
+          <td class="mono num">77.3%</td>
+          <td><span class="band-chip band-5">Very High</span></td>
+          <td class="mono num">$15.0K</td>
+          <td><span class="outcome-bad">Defaulted</span></td>
+        </tr><tr>
+          <td class="mono">97330426</td>
+          <td>$15.2K</td>
+          <td><span class="grade-chip">F5</span></td>
+          <td>Debt Consolidation</td>
+          <td>NY</td>
+          <td class="mono num">77.3%</td>
+          <td><span class="band-chip band-5">Very High</span></td>
+          <td class="mono num">$10.5K</td>
+          <td><span class="outcome-bad">Defaulted</span></td>
+        </tr><tr>
+          <td class="mono">131915438</td>
+          <td>$20.0K</td>
+          <td><span class="grade-chip">F1</span></td>
+          <td>Home Improvement</td>
+          <td>NY</td>
+          <td class="mono num">77.1%</td>
+          <td><span class="band-chip band-5">Very High</span></td>
+          <td class="mono num">$13.9K</td>
+          <td><span class="outcome-bad">Defaulted</span></td>
+        </tr><tr>
+          <td class="mono">117192355</td>
+          <td>$35.0K</td>
+          <td><span class="grade-chip">G5</span></td>
+          <td>Debt Consolidation</td>
+          <td>LA</td>
+          <td class="mono num">77.0%</td>
+          <td><span class="band-chip band-5">Very High</span></td>
+          <td class="mono num">$24.2K</td>
+          <td><span class="outcome-bad">Defaulted</span></td>
+        </tr><tr>
+          <td class="mono">130460222</td>
+          <td>$40.0K</td>
+          <td><span class="grade-chip">F1</span></td>
+          <td>Debt Consolidation</td>
+          <td>MO</td>
+          <td class="mono num">76.9%</td>
+          <td><span class="band-chip band-5">Very High</span></td>
+          <td class="mono num">$27.7K</td>
+          <td><span class="outcome-bad">Defaulted</span></td>
+        </tr><tr>
+          <td class="mono">106211896</td>
+          <td>$10.0K</td>
+          <td><span class="grade-chip">G1</span></td>
+          <td>Debt Consolidation</td>
+          <td>AL</td>
+          <td class="mono num">76.8%</td>
+          <td><span class="band-chip band-5">Very High</span></td>
+          <td class="mono num">$6.9K</td>
+          <td><span class="outcome-ok">Repaid</span></td>
+        </tr><tr>
+          <td class="mono">108521865</td>
+          <td>$20.0K</td>
+          <td><span class="grade-chip">G5</span></td>
+          <td>Debt Consolidation</td>
+          <td>MD</td>
+          <td class="mono num">76.8%</td>
+          <td><span class="band-chip band-5">Very High</span></td>
+          <td class="mono num">$13.8K</td>
+          <td><span class="outcome-ok">Repaid</span></td>
+        </tr><tr>
+          <td class="mono">116988117</td>
+          <td>$25.0K</td>
+          <td><span class="grade-chip">D5</span></td>
+          <td>Debt Consolidation</td>
+          <td>TX</td>
+          <td class="mono num">76.8%</td>
+          <td><span class="band-chip band-5">Very High</span></td>
+          <td class="mono num">$17.3K</td>
+          <td><span class="outcome-bad">Defaulted</span></td>
         </tr></tbody>
     </table>
   </div>
 </div>
 
 <div class="footer">
-  PD model: HistGradientBoostingClassifier, trained on 87,891 completed loans (Fully Paid / Charged Off), validated on a 25% held-out test set. Origination-time features only &mdash; post-origination fields (received payments, updated FICO) excluded to prevent leakage. Expected loss assumes 100% loss given default (no recovery data available), so is a conservative upper bound. Full methodology in the accompanying report and Excel workbook.
+  PD model v2: HistGradientBoostingClassifier trained on 1,122,460 loans issued up to 2016 and validated <strong>out-of-time</strong> on 225,639 loans issued 2017&ndash;2018 &mdash; the model never saw any of the loans shown here during training. Origination-time features only; post-origination fields (received payments, recoveries, updated FICO, hardship flags) are excluded to prevent leakage. Expected loss applies a 90% loss given default, measured from actual recovery data rather than assumed. Full methodology in the project README.
 </div>
 
 <div id="tooltip"></div>
