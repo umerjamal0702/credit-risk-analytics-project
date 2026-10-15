@@ -1,0 +1,799 @@
+{
+  "portfolio": {
+    "n_resolved_loans": 1348099,
+    "n_defaults": 269360,
+    "overall_default_rate": 0.19980728418313493,
+    "vintage_trend": [
+      {
+        "issue_year": 2007,
+        "n_resolved": 603,
+        "default_rate": 0.262
+      },
+      {
+        "issue_year": 2008,
+        "n_resolved": 2393,
+        "default_rate": 0.2073
+      },
+      {
+        "issue_year": 2009,
+        "n_resolved": 5281,
+        "default_rate": 0.1369
+      },
+      {
+        "issue_year": 2010,
+        "n_resolved": 12537,
+        "default_rate": 0.1401
+      },
+      {
+        "issue_year": 2011,
+        "n_resolved": 21721,
+        "default_rate": 0.1518
+      },
+      {
+        "issue_year": 2012,
+        "n_resolved": 53367,
+        "default_rate": 0.162
+      },
+      {
+        "issue_year": 2013,
+        "n_resolved": 134804,
+        "default_rate": 0.156
+      },
+      {
+        "issue_year": 2014,
+        "n_resolved": 223103,
+        "default_rate": 0.1845
+      },
+      {
+        "issue_year": 2015,
+        "n_resolved": 375546,
+        "default_rate": 0.20190000000000002
+      },
+      {
+        "issue_year": 2016,
+        "n_resolved": 293105,
+        "default_rate": 0.2329
+      },
+      {
+        "issue_year": 2017,
+        "n_resolved": 169321,
+        "default_rate": 0.23129999999999998
+      },
+      {
+        "issue_year": 2018,
+        "n_resolved": 56318,
+        "default_rate": 0.1576
+      }
+    ],
+    "grade_scorecard": [
+      {
+        "grade": "A",
+        "n_loans": 235193,
+        "total_funded": 3264291775.0,
+        "wavg_int_rate": 7.11,
+        "default_rate": 0.0604,
+        "total_net_loss": 103445987.8
+      },
+      {
+        "grade": "B",
+        "n_loans": 393102,
+        "total_funded": 5198798075.0,
+        "wavg_int_rate": 10.66,
+        "default_rate": 0.134,
+        "total_net_loss": 407721167.09
+      },
+      {
+        "grade": "C",
+        "n_loans": 382323,
+        "total_funded": 5419304775.0,
+        "wavg_int_rate": 14.07,
+        "default_rate": 0.22440000000000002,
+        "total_net_loss": 789870956.0138173
+      },
+      {
+        "grade": "D",
+        "n_loans": 201657,
+        "total_funded": 3073793625.0,
+        "wavg_int_rate": 17.76,
+        "default_rate": 0.3038,
+        "total_net_loss": 645806957.7343949
+      },
+      {
+        "grade": "E",
+        "n_loans": 94192,
+        "total_funded": 1652654100.0,
+        "wavg_int_rate": 21.14,
+        "default_rate": 0.3843,
+        "total_net_loss": 454217096.01
+      },
+      {
+        "grade": "F",
+        "n_loans": 32306,
+        "total_funded": 613936900.0,
+        "wavg_int_rate": 24.92,
+        "default_rate": 0.4515,
+        "total_net_loss": 207291870.46
+      },
+      {
+        "grade": "G",
+        "n_loans": 9326,
+        "total_funded": 190098450.0,
+        "wavg_int_rate": 27.61,
+        "default_rate": 0.49670000000000003,
+        "total_net_loss": 71673331.15
+      }
+    ],
+    "recovery_by_grade": [
+      {
+        "grade": "A",
+        "n_defaults": 14214,
+        "recovery_rate": 0.1003,
+        "implied_lgd": 0.8996999999999999
+      },
+      {
+        "grade": "B",
+        "n_defaults": 52661,
+        "recovery_rate": 0.1041,
+        "implied_lgd": 0.8959
+      },
+      {
+        "grade": "C",
+        "n_defaults": 85805,
+        "recovery_rate": 0.1065,
+        "implied_lgd": 0.8935
+      },
+      {
+        "grade": "D",
+        "n_defaults": 61264,
+        "recovery_rate": 0.1079,
+        "implied_lgd": 0.8921
+      },
+      {
+        "grade": "E",
+        "n_defaults": 36199,
+        "recovery_rate": 0.113,
+        "implied_lgd": 0.887
+      },
+      {
+        "grade": "F",
+        "n_defaults": 14585,
+        "recovery_rate": 0.1159,
+        "implied_lgd": 0.8841
+      },
+      {
+        "grade": "G",
+        "n_defaults": 4632,
+        "recovery_rate": 0.1134,
+        "implied_lgd": 0.8866
+      }
+    ],
+    "top_states": [
+      {
+        "state": "CA",
+        "n_loans": 196853,
+        "total_exposure": 2885623375.0,
+        "default_rate": 0.1963
+      },
+      {
+        "state": "TX",
+        "n_loans": 110354,
+        "total_exposure": 1673963425.0,
+        "default_rate": 0.1984
+      },
+      {
+        "state": "NY",
+        "n_loans": 110097,
+        "total_exposure": 1572517275.0,
+        "default_rate": 0.2205
+      },
+      {
+        "state": "FL",
+        "n_loans": 95843,
+        "total_exposure": 1314115350.0,
+        "default_rate": 0.215
+      },
+      {
+        "state": "IL",
+        "n_loans": 51870,
+        "total_exposure": 762742825.0,
+        "default_rate": 0.1812
+      },
+      {
+        "state": "NJ",
+        "n_loans": 48583,
+        "total_exposure": 735800150.0,
+        "default_rate": 0.2112
+      },
+      {
+        "state": "PA",
+        "n_loans": 45656,
+        "total_exposure": 639899050.0,
+        "default_rate": 0.20829999999999999
+      },
+      {
+        "state": "GA",
+        "n_loans": 43480,
+        "total_exposure": 633637025.0,
+        "default_rate": 0.1843
+      },
+      {
+        "state": "OH",
+        "n_loans": 43947,
+        "total_exposure": 600497300.0,
+        "default_rate": 0.2052
+      },
+      {
+        "state": "VA",
+        "n_loans": 38119,
+        "total_exposure": 582987150.0,
+        "default_rate": 0.19940000000000002
+      }
+    ]
+  },
+  "model": {
+    "name": "HistGradientBoostingClassifier",
+    "logreg_auc": 0.7064168766587315,
+    "hgb_auc": 0.7184008874856653,
+    "hgb_ks": 0.3175873249235676,
+    "hgb_brier": 0.15069457109492002,
+    "n_train": 1122460,
+    "n_test": 225639,
+    "n_features": 176,
+    "n_dropped_for_missingness": 14,
+    "train_default_rate": 0.1971713914081571,
+    "test_default_rate": 0.21291975234777677,
+    "validation": "out-of-time (train issue years <= 2016, test 2017-2018)",
+    "v1_comparison": {
+      "auc": 0.743970494775596,
+      "ks": 0.36027718696674743,
+      "brier": 0.13945056516308238,
+      "n_train": 65918,
+      "n_test": 21973,
+      "validation": "random 75/25 split within a single 2015 vintage"
+    },
+    "decile_table": [
+      {
+        "decile": 1,
+        "n": 22564,
+        "avg_pd": 0.0348,
+        "actual_default_rate": 0.036,
+        "lift": 0.169
+      },
+      {
+        "decile": 2,
+        "n": 22564,
+        "avg_pd": 0.0686,
+        "actual_default_rate": 0.0755,
+        "lift": 0.354
+      },
+      {
+        "decile": 3,
+        "n": 22564,
+        "avg_pd": 0.0997,
+        "actual_default_rate": 0.1105,
+        "lift": 0.519
+      },
+      {
+        "decile": 4,
+        "n": 22564,
+        "avg_pd": 0.1297,
+        "actual_default_rate": 0.1404,
+        "lift": 0.66
+      },
+      {
+        "decile": 5,
+        "n": 22564,
+        "avg_pd": 0.1602,
+        "actual_default_rate": 0.1766,
+        "lift": 0.829
+      },
+      {
+        "decile": 6,
+        "n": 22563,
+        "avg_pd": 0.1929,
+        "actual_default_rate": 0.2111,
+        "lift": 0.992
+      },
+      {
+        "decile": 7,
+        "n": 22564,
+        "avg_pd": 0.2311,
+        "actual_default_rate": 0.2488,
+        "lift": 1.169
+      },
+      {
+        "decile": 8,
+        "n": 22564,
+        "avg_pd": 0.2804,
+        "actual_default_rate": 0.2991,
+        "lift": 1.405
+      },
+      {
+        "decile": 9,
+        "n": 22564,
+        "avg_pd": 0.3526,
+        "actual_default_rate": 0.3578,
+        "lift": 1.68
+      },
+      {
+        "decile": 10,
+        "n": 22564,
+        "avg_pd": 0.4944,
+        "actual_default_rate": 0.4734,
+        "lift": 2.223
+      }
+    ],
+    "top_features": [
+      {
+        "feature": "int_rate",
+        "importance": 0.04936962545187553
+      },
+      {
+        "feature": "term_months",
+        "importance": 0.012062136395615864
+      },
+      {
+        "feature": "loan_amnt",
+        "importance": 0.009642516488290575
+      },
+      {
+        "feature": "dti",
+        "importance": 0.006713788298040013
+      },
+      {
+        "feature": "annual_inc",
+        "importance": 0.004855183553590647
+      },
+      {
+        "feature": "fico_range_low",
+        "importance": 0.002907215973536781
+      },
+      {
+        "feature": "installment",
+        "importance": 0.0027112212417499614
+      },
+      {
+        "feature": "mort_acc",
+        "importance": 0.0026155601374197703
+      },
+      {
+        "feature": "grade_B",
+        "importance": 0.001914040941299011
+      },
+      {
+        "feature": "mo_sin_old_rev_tl_op",
+        "importance": 0.0017619081079668143
+      },
+      {
+        "feature": "emp_length_years",
+        "importance": 0.0016923519849024293
+      },
+      {
+        "feature": "home_ownership_RENT",
+        "importance": 0.0016890287109862846
+      }
+    ]
+  },
+  "scoring": {
+    "n_scored": 225639,
+    "total_exposure": 3259579400.0,
+    "avg_predicted_pd": 0.20444139352239638,
+    "actual_default_rate": 0.21291975234777677,
+    "expected_loss": 662613993.65,
+    "actual_loss": 693213885.0,
+    "lgd_assumption": 0.9,
+    "risk_bands": [
+      {
+        "band": "1 Low",
+        "count": 27816,
+        "exposure": 362739625.0,
+        "avg_predicted_pd": 0.0389,
+        "actual_default_rate": 0.0411,
+        "expected_loss": 12699444.45,
+        "actual_loss": 15136290.0
+      },
+      {
+        "band": "2 Low-Medium",
+        "count": 43741,
+        "exposure": 531343675.0,
+        "avg_predicted_pd": 0.0905,
+        "actual_default_rate": 0.0988,
+        "expected_loss": 43280350.61,
+        "actual_loss": 51360052.5
+      },
+      {
+        "band": "3 Medium",
+        "count": 57303,
+        "exposure": 745106325.0,
+        "avg_predicted_pd": 0.1588,
+        "actual_default_rate": 0.1742,
+        "expected_loss": 107046005.99,
+        "actual_loss": 119241855.0
+      },
+      {
+        "band": "4 Medium-High",
+        "count": 47964,
+        "exposure": 723812875.0,
+        "avg_predicted_pd": 0.2451,
+        "actual_default_rate": 0.2639,
+        "expected_loss": 160462049.23,
+        "actual_loss": 173336130.0
+      },
+      {
+        "band": "5 High",
+        "count": 34012,
+        "exposure": 603366625.0,
+        "avg_predicted_pd": 0.3641,
+        "actual_default_rate": 0.3656,
+        "expected_loss": 198627219.61,
+        "actual_loss": 199467607.5
+      },
+      {
+        "band": "6 Very High",
+        "count": 14803,
+        "exposure": 293210275.0,
+        "avg_predicted_pd": 0.5306,
+        "actual_default_rate": 0.5064,
+        "expected_loss": 140498923.76,
+        "actual_loss": 134671950.0
+      }
+    ],
+    "grade_predicted_vs_actual": [
+      {
+        "grade": "A",
+        "predicted_pd": 0.05408707151850918,
+        "actual_default_rate": 0.06325862503147822,
+        "count": 39710
+      },
+      {
+        "grade": "B",
+        "predicted_pd": 0.13361068181379954,
+        "actual_default_rate": 0.1474595880065559,
+        "count": 62234
+      },
+      {
+        "grade": "C",
+        "predicted_pd": 0.22809193317449838,
+        "actual_default_rate": 0.24626115911243793,
+        "count": 69674
+      },
+      {
+        "grade": "D",
+        "predicted_pd": 0.323215485085975,
+        "actual_default_rate": 0.3218212656451047,
+        "count": 34196
+      },
+      {
+        "grade": "E",
+        "predicted_pd": 0.40953928333081685,
+        "actual_default_rate": 0.3838139815793447,
+        "count": 13246
+      },
+      {
+        "grade": "F",
+        "predicted_pd": 0.49492414759805065,
+        "actual_default_rate": 0.457182640983987,
+        "count": 4309
+      },
+      {
+        "grade": "G",
+        "predicted_pd": 0.5131661814977974,
+        "actual_default_rate": 0.5008810572687225,
+        "count": 2270
+      }
+    ],
+    "purpose_actual_rates": [
+      {
+        "purpose": "small_business",
+        "default_rate": 0.3614864864864865,
+        "count": 2368
+      },
+      {
+        "purpose": "moving",
+        "default_rate": 0.2622868605817452,
+        "count": 1994
+      },
+      {
+        "purpose": "medical",
+        "default_rate": 0.23597006948156066,
+        "count": 3742
+      },
+      {
+        "purpose": "debt_consolidation",
+        "default_rate": 0.22282898457064385,
+        "count": 123790
+      },
+      {
+        "purpose": "other",
+        "default_rate": 0.2228287841191067,
+        "count": 18135
+      },
+      {
+        "purpose": "major_purchase",
+        "default_rate": 0.21731999343939642,
+        "count": 6097
+      },
+      {
+        "purpose": "house",
+        "default_rate": 0.20666959192628345,
+        "count": 2279
+      },
+      {
+        "purpose": "vacation",
+        "default_rate": 0.19919606967396158,
+        "count": 2239
+      },
+      {
+        "purpose": "home_improvement",
+        "default_rate": 0.18442510808296395,
+        "count": 18273
+      },
+      {
+        "purpose": "credit_card",
+        "default_rate": 0.18439310329036246,
+        "count": 43673
+      },
+      {
+        "purpose": "car",
+        "default_rate": 0.15584866365845193,
+        "count": 2881
+      }
+    ],
+    "top20_highest_risk": [
+      {
+        "id": 111757961,
+        "loan_amnt": 15950.0,
+        "grade": "G",
+        "sub_grade": "G3",
+        "purpose": "debt_consolidation",
+        "addr_state": "NY",
+        "pd": 0.813351,
+        "risk_band": "6 Very High",
+        "expected_loss": 11675.65,
+        "actual_default": 1
+      },
+      {
+        "id": 95886454,
+        "loan_amnt": 32000.0,
+        "grade": "G",
+        "sub_grade": "G5",
+        "purpose": "small_business",
+        "addr_state": "CA",
+        "pd": 0.807774,
+        "risk_band": "6 Very High",
+        "expected_loss": 23263.89,
+        "actual_default": 0
+      },
+      {
+        "id": 111008192,
+        "loan_amnt": 30000.0,
+        "grade": "G",
+        "sub_grade": "G4",
+        "purpose": "other",
+        "addr_state": "CA",
+        "pd": 0.799704,
+        "risk_band": "6 Very High",
+        "expected_loss": 21592.01,
+        "actual_default": 1
+      },
+      {
+        "id": 111976854,
+        "loan_amnt": 25000.0,
+        "grade": "D",
+        "sub_grade": "D5",
+        "purpose": "debt_consolidation",
+        "addr_state": "OK",
+        "pd": 0.798933,
+        "risk_band": "6 Very High",
+        "expected_loss": 17975.99,
+        "actual_default": 0
+      },
+      {
+        "id": 102648623,
+        "loan_amnt": 25000.0,
+        "grade": "F",
+        "sub_grade": "F1",
+        "purpose": "debt_consolidation",
+        "addr_state": "TX",
+        "pd": 0.790848,
+        "risk_band": "6 Very High",
+        "expected_loss": 17794.08,
+        "actual_default": 1
+      },
+      {
+        "id": 134871757,
+        "loan_amnt": 30000.0,
+        "grade": "E",
+        "sub_grade": "E5",
+        "purpose": "debt_consolidation",
+        "addr_state": "PA",
+        "pd": 0.787629,
+        "risk_band": "6 Very High",
+        "expected_loss": 21265.98,
+        "actual_default": 1
+      },
+      {
+        "id": 109786394,
+        "loan_amnt": 30000.0,
+        "grade": "F",
+        "sub_grade": "F1",
+        "purpose": "debt_consolidation",
+        "addr_state": "GA",
+        "pd": 0.787298,
+        "risk_band": "6 Very High",
+        "expected_loss": 21257.05,
+        "actual_default": 1
+      },
+      {
+        "id": 110430372,
+        "loan_amnt": 24000.0,
+        "grade": "E",
+        "sub_grade": "E1",
+        "purpose": "debt_consolidation",
+        "addr_state": "AR",
+        "pd": 0.784692,
+        "risk_band": "6 Very High",
+        "expected_loss": 16949.35,
+        "actual_default": 1
+      },
+      {
+        "id": 125033188,
+        "loan_amnt": 35000.0,
+        "grade": "G",
+        "sub_grade": "G1",
+        "purpose": "debt_consolidation",
+        "addr_state": "TX",
+        "pd": 0.782327,
+        "risk_band": "6 Very High",
+        "expected_loss": 24643.3,
+        "actual_default": 1
+      },
+      {
+        "id": 118162507,
+        "loan_amnt": 35000.0,
+        "grade": "G",
+        "sub_grade": "G1",
+        "purpose": "debt_consolidation",
+        "addr_state": "KY",
+        "pd": 0.780431,
+        "risk_band": "6 Very High",
+        "expected_loss": 24583.58,
+        "actual_default": 1
+      },
+      {
+        "id": 111095805,
+        "loan_amnt": 18000.0,
+        "grade": "D",
+        "sub_grade": "D5",
+        "purpose": "debt_consolidation",
+        "addr_state": "TX",
+        "pd": 0.774317,
+        "risk_band": "6 Very High",
+        "expected_loss": 12543.94,
+        "actual_default": 1
+      },
+      {
+        "id": 113499400,
+        "loan_amnt": 28000.0,
+        "grade": "G",
+        "sub_grade": "G5",
+        "purpose": "debt_consolidation",
+        "addr_state": "CA",
+        "pd": 0.7737,
+        "risk_band": "6 Very High",
+        "expected_loss": 19497.24,
+        "actual_default": 0
+      },
+      {
+        "id": 125028022,
+        "loan_amnt": 21500.0,
+        "grade": "E",
+        "sub_grade": "E5",
+        "purpose": "other",
+        "addr_state": "NC",
+        "pd": 0.772991,
+        "risk_band": "6 Very High",
+        "expected_loss": 14957.38,
+        "actual_default": 1
+      },
+      {
+        "id": 97330426,
+        "loan_amnt": 15150.0,
+        "grade": "F",
+        "sub_grade": "F5",
+        "purpose": "debt_consolidation",
+        "addr_state": "NY",
+        "pd": 0.772982,
+        "risk_band": "6 Very High",
+        "expected_loss": 10539.61,
+        "actual_default": 1
+      },
+      {
+        "id": 131915438,
+        "loan_amnt": 20000.0,
+        "grade": "F",
+        "sub_grade": "F1",
+        "purpose": "home_improvement",
+        "addr_state": "NY",
+        "pd": 0.770686,
+        "risk_band": "6 Very High",
+        "expected_loss": 13872.35,
+        "actual_default": 1
+      },
+      {
+        "id": 117192355,
+        "loan_amnt": 35000.0,
+        "grade": "G",
+        "sub_grade": "G5",
+        "purpose": "debt_consolidation",
+        "addr_state": "LA",
+        "pd": 0.769591,
+        "risk_band": "6 Very High",
+        "expected_loss": 24242.12,
+        "actual_default": 1
+      },
+      {
+        "id": 130460222,
+        "loan_amnt": 40000.0,
+        "grade": "F",
+        "sub_grade": "F1",
+        "purpose": "debt_consolidation",
+        "addr_state": "MO",
+        "pd": 0.768924,
+        "risk_band": "6 Very High",
+        "expected_loss": 27681.26,
+        "actual_default": 1
+      },
+      {
+        "id": 106211896,
+        "loan_amnt": 10000.0,
+        "grade": "G",
+        "sub_grade": "G1",
+        "purpose": "debt_consolidation",
+        "addr_state": "AL",
+        "pd": 0.76836,
+        "risk_band": "6 Very High",
+        "expected_loss": 6915.24,
+        "actual_default": 0
+      },
+      {
+        "id": 108521865,
+        "loan_amnt": 20000.0,
+        "grade": "G",
+        "sub_grade": "G5",
+        "purpose": "debt_consolidation",
+        "addr_state": "MD",
+        "pd": 0.768154,
+        "risk_band": "6 Very High",
+        "expected_loss": 13826.77,
+        "actual_default": 0
+      },
+      {
+        "id": 116988117,
+        "loan_amnt": 25000.0,
+        "grade": "D",
+        "sub_grade": "D5",
+        "purpose": "debt_consolidation",
+        "addr_state": "TX",
+        "pd": 0.767998,
+        "risk_band": "6 Very High",
+        "expected_loss": 17279.96,
+        "actual_default": 1
+      }
+    ],
+    "top20_actual_defaults": 15
+  },
+  "reject_inference": {
+    "headline_auc": 0.6715822814817114,
+    "with_score_auc": 0.8553433940818149,
+    "emp_length_inflated_auc": 0.9075906506535071,
+    "emp_length_under_1yr_accepted": 0.0840188032331632,
+    "emp_length_under_1yr_rejected": 0.8302123735679405,
+    "accepted_sampled": 322952,
+    "rejected_sampled": 300529
+  },
+  "warehouse": {
+    "raw_accepted_rows": 2260668,
+    "raw_rejected_rows": 27648741
+  }
+}

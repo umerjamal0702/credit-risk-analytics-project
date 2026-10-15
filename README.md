@@ -113,6 +113,7 @@ Both generations used a Logistic Regression baseline and a gradient boosting mod
 - Loss given default is approximately 90% across every risk grade. Recoveries through collections return only 10.0% to 11.6% of the unpaid balance, and this is remarkably stable regardless of borrower quality.
 - Interest rate, loan term, loan amount and debt-to-income ratio are the strongest predictors of default.
 - The model is well calibrated on unseen data. Across six risk bands on the out-of-time test set, predicted probability tracks the actual default rate closely, from 3.9% predicted against 4.1% actual in the lowest band to 53.1% predicted against 50.6% actual in the highest.
+- Applying the measured 90% loss given default to the scored book gives an expected loss of $662.6M against $693.2M actually incurred, so the model under-predicts losses by 4.4%. For provisioning the direction matters more than the size: a model that understates losses produces reserves that are too thin.
 - Exposure concentration and risk concentration are not the same. California, Texas and New York carry the largest exposure at $2.89B, $1.67B and $1.57B, but New York defaults at 22.1% against California's 19.6%.
 - Debt-to-income ratio is the strongest legitimate driver of approval decisions, and adding a credit score proxy raises acceptance model AUC from 67.2% to 85.5%.
 
