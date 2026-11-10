@@ -36,7 +36,17 @@ The goal of this project was to:
 
 ## Project Workflow
 
-### 1. Data Warehouse
+### 1. Data Cleaning and Exploration
+
+Before any warehouse or model existed, the raw accepted-loans file was worked through cell by cell in `Python/data_preparation/data_cleaning_and_exploration.ipynb`.
+
+The raw file is not clean UTF-8, so the first attempt to count its rows fails outright. From there the work was separating loans that had reached a final outcome from loans still running, stripping out the fields a lender would not have at the point of approval, auditing how empty each column was, deriving credit history length and employment length as usable numbers, aligning the training and scoring datasets to the same shape, and filling what remained according to what each blank actually meant.
+
+Columns were removed across several passes rather than one, because the fields that leak an outcome are not obvious from their names. Searching the column list for `rec_`, `recover`, `next_`, `hardship` and `settlement` is what surfaced them.
+
+The notebook is published as it was worked, failed cell included, because the failures are part of what the raw data does.
+
+### 2. Data Warehouse
 
 Loaded both raw source files into a SQL warehouse, since the accepted file exceeds Excel's row limit by 2x and the rejected file by 26x.
 
@@ -49,19 +59,19 @@ Two analytical views sit on top of the raw tables:
 - `vw_loan_performance` — one row per resolved loan, with a default flag, net loss and recovery rate. Loans still open are excluded so the default rate is not understated.
 - `vw_applications_funnel` — accepted and rejected applications unioned at a common grain for acceptance-rate analysis.
 
-### 2. SQL Analysis
+### 3. SQL Analysis
 
 Eight analytical queries covering vintage default trends, underwriting acceptance rates by state and year, grade scorecards, recovery analysis, monthly issuance trends, purpose-within-grade risk, and state exposure concentration.
 
 Concepts used: CTEs, window functions (`RANK`, `LAG`, moving averages), `HAVING`, conditional aggregation, date parsing and cohort analysis.
 
-### 3. Excel Analysis
+### 4. Excel Analysis
 
 ![Default Rate by Grade](Excel/screenshots/sheet-03.jpg)
 
 A ten-sheet analytical workbook built on a 250,000-loan sample, with a stated objective on every sheet, live formulas, and charts covering default rates by grade, purpose, home ownership and verification status, plus exposure analysis and a financial model.
 
-### 4. Predictive Modelling
+### 5. Predictive Modelling
 
 Two generations of PD model were built:
 
@@ -74,19 +84,15 @@ Both models exclude data leakage columns. Fields only known after a loan resolve
 
 A missingness audit dropped 14 further features that were more than 50% empty in the training window, preventing the model from learning field availability as a proxy for how recent a loan is.
 
-### 5. Reject Inference Analysis
+### 6. Reject Inference Analysis
 
 An acceptance model was built on the fields shared by accepted and declined applications, to analyse what separates an approved application from a rejected one.
 
 This analysis also surfaced a data quality issue. Employment length is recorded as "less than 1 year" for 83.0% of rejected applications compared to 8.4% of accepted ones, which is a form default rather than a real signal. Including it raised model AUC from 0.672 to 0.908, so it was excluded from the reported model.
 
-### 6. Dashboard and Reporting
+### 7. Power BI Reporting
 
-![Credit Risk Monitor](Dashboard/dashboard_preview.png)
-
-An interactive dashboard built as a self-contained HTML page generated from Python, with charts drawn as inline SVG rather than through a charting library. It reports the v2 model against the 225,639 loans in the out-of-time test set, so every predicted figure is shown beside the outcome that actually occurred: predicted versus actual default rate by grade, calibration across risk deciles, risk band distribution, and a watchlist of the twenty highest-risk loans with a column recording whether each one really defaulted (fifteen of the twenty did).
-
-A three-page Power BI report was built on the same data, using twenty DAX measures over twelve aggregate tables and the scored-loan fact table.
+A three-page Power BI report was built on the modelled data, using twenty DAX measures over twelve aggregate tables and the scored-loan fact table.
 
 **Page 1 — Portfolio Performance**
 
@@ -162,7 +168,6 @@ Both generations used a Logistic Regression baseline and a gradient boosting mod
 ## Repository Structure
 
 ```text
-Dashboard/
 Dataset/
 Excel/
 PowerBI/
