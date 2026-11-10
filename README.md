@@ -86,7 +86,27 @@ This analysis also surfaced a data quality issue. Employment length is recorded 
 
 An interactive dashboard built as a self-contained HTML page generated from Python, with charts drawn as inline SVG rather than through a charting library. It reports the v2 model against the 225,639 loans in the out-of-time test set, so every predicted figure is shown beside the outcome that actually occurred: predicted versus actual default rate by grade, calibration across risk deciles, risk band distribution, and a watchlist of the twenty highest-risk loans with a column recording whether each one really defaulted (fifteen of the twenty did).
 
-A Power BI data extract and build guide are also included, specifying a three-page report with the data model, DAX measures and visuals for each page. The Power BI dashboard itself is not built in this repository.
+A three-page Power BI report was built on the same data, using twenty DAX measures over twelve aggregate tables and the scored-loan fact table.
+
+**Page 1 — Portfolio Performance**
+
+![Portfolio Performance](PowerBI/screenshots/page1_portfolio_performance.png)
+
+Vintage default rates with a trailing three-year moving average, the grade scorecard, and recovery rates by grade. The vintage chart carries a note that the 2017 and 2018 cohorts are still maturing, because those loans have had less time to reach charge-off and their rates understate final performance.
+
+**Page 2 — Underwriting Funnel**
+
+![Underwriting Funnel](PowerBI/screenshots/page2_underwriting_funnel.png)
+
+The 29.9 million applications behind the funded book. Acceptance rate peaks at 15.1% in 2013 and falls to 5.0% by 2018 while annual application volume grows from 28,000 to 10 million. Debt-to-income separates the two populations cleanly, from 12.5-19.1% on accepted applications against 18.8-30.2% on declined ones.
+
+**Page 3 — Model and Risk**
+
+![Model and Risk](PowerBI/screenshots/page3_model_risk.png)
+
+The v2 model measured against the 225,639 loans in the out-of-time test set: predicted against actual default rate by decile and by risk band, and a watchlist of the twenty highest-risk loans with the outcome that actually occurred. Fifteen of the twenty defaulted.
+
+The Power BI file, the import layer that feeds it and a click-by-click build guide are all in `PowerBI/`.
 
 ---
 
@@ -134,7 +154,7 @@ Both generations used a Logistic Regression baseline and a gradient boosting mod
 - Loss given default is measured at charge-off and does not discount later recoveries or account for time value of money.
 - The credit score proxy compares LendingClub's risk score for declined applications against FICO ranges for approved loans. These are similar measures but not confirmed to share a scale.
 - The PD model contains no macroeconomic variables, so it describes default patterns without explaining the economic cycle behind them.
-- The Power BI component is delivered as a modelled data extract and build guide. The dashboard file itself is not included.
+- The Power BI report is built against a static extract rather than a live connection, so it does not refresh on its own.
 - Full reject inference techniques such as fuzzy augmentation were scoped out in favour of a standalone acceptance model.
 
 ---
