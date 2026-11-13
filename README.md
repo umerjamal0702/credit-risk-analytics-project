@@ -26,11 +26,11 @@ The goal of this project was to:
 
 ## Tools & Technologies
 
-- SQL (SQLite)
+- SQL 
 - Python (pandas, scikit-learn)
 - Microsoft Excel
 - Power BI
-- GitHub
+  
 
 ---
 
